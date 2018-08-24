@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketMS.API.Infrastructure
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketMS.API.Data", "TicketMS.API.Data\TicketMS.API.Data.csproj", "{0AE37968-5A8B-44AA-ABD2-657A1D7B8F46}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketMS.API.Data.Entity", "TicketMS.API.Data.Entity\TicketMS.API.Data.Entity.csproj", "{52C6C8E9-BD69-4DFE-8D31-7D065C922DA3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{0AE37968-5A8B-44AA-ABD2-657A1D7B8F46}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AE37968-5A8B-44AA-ABD2-657A1D7B8F46}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0AE37968-5A8B-44AA-ABD2-657A1D7B8F46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52C6C8E9-BD69-4DFE-8D31-7D065C922DA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52C6C8E9-BD69-4DFE-8D31-7D065C922DA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52C6C8E9-BD69-4DFE-8D31-7D065C922DA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52C6C8E9-BD69-4DFE-8D31-7D065C922DA3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
