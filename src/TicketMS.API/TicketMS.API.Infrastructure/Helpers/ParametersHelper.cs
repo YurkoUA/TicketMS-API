@@ -20,6 +20,11 @@ namespace TicketMS.API.Infrastructure.Helpers
                 {
                     value = (value as IEnumerable<int>).AsDataTableParam().AsTableValuedParameter(Constants.IntArrayType);
                 }
+                else if (prop.GetType() == typeof(byte[]))
+                {
+                    dynamicParameters.Add($"@{prop.Name}", value, dbType: DbType.Binary);
+                    continue;
+                }
 
                 dynamicParameters.Add($"@{prop.Name}", value);
             }
