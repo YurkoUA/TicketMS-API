@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data;
 using Dapper;
 using TicketMS.API.Infrastructure.Extensions;
 
@@ -6,7 +7,7 @@ namespace TicketMS.API.Infrastructure.Helpers
 {
     public class ParametersHelper
     {
-        public static DynamicParameters GetFromAnonymousObject(object parameters)
+        public static DynamicParameters CreateFromAnonymousObject(object parameters, bool includeReturnedId = false)
         {
             var dynamicParameters = new DynamicParameters();
             var type = parameters.GetType();
@@ -23,6 +24,7 @@ namespace TicketMS.API.Infrastructure.Helpers
                 dynamicParameters.Add($"@{prop.Name}", value);
             }
 
+            dynamicParameters.Add(Constants.ID_PARAMETER_NAME, dbType: DbType.Int32, direction: ParameterDirection.ReturnValue);
             return dynamicParameters;
         }
     }
