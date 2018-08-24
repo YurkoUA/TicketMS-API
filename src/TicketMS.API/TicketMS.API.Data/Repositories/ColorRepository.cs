@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using TicketMS.API.Data.Entity;
-using TicketMS.API.Infrastructure;
 using TicketMS.API.Infrastructure.Database;
 using TicketMS.API.Infrastructure.DTO.Color;
+using TicketMS.API.Infrastructure.Extensions;
 using TicketMS.API.Infrastructure.Helpers;
 using TicketMS.API.Infrastructure.Repositories;
 
@@ -21,26 +21,26 @@ namespace TicketMS.API.Data.Repositories
 
         public ColorEM GetColor(int id)
         {
-            var param = ParametersHelper.CreateFromAnonymousObject(new { id });
+            var param = ParametersHelper.CreateIdParameter(id);
             return ExecuteQuerySingle<ColorEM>("SELECT * FROM [v_Color] WHERE [Id] = @id", param);
         }
 
         public int CreateColor(ColorDTO colorDTO)
         {
-            var param = ParametersHelper.CreateFromAnonymousObject(new { name = colorDTO.Name, paletteName = colorDTO.PaletteName }, true);
+            var param = ParametersHelper.CreateFromObject(colorDTO).IncludeReturnedId();
             ExecuteSP("USP_Color_Create", param);
-            return param.Get<int>(Constants.ID_PARAMETER_NAME);
+            return param.GetReturnedId();
         }
 
         public void EditColor(int id, ColorDTO colorDTO)
         {
-            var param = ParametersHelper.CreateFromAnonymousObject(new { id, colorDTO.Name, colorDTO.PaletteName });
+            var param = ParametersHelper.CreateFromObject(colorDTO).IncludeId(id);
             ExecuteSP("USP_Color_Update", param);
         }
 
         public void DeleteColor(int id)
         {
-            var param = ParametersHelper.CreateFromAnonymousObject(new { id });
+            var param = ParametersHelper.CreateIdParameter(id);
             ExecuteSP("USP_Color_Delete", param);
         }
     }

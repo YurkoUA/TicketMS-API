@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using Dapper;
 using Dapper.Contrib.Extensions;
 using TicketMS.API.Infrastructure.Database;
@@ -59,6 +60,11 @@ namespace TicketMS.API.Data.Repositories
         public TEntity ExecuteQuerySingle<TEntity>(string query, object paramModel = null) where TEntity : class
         {
             return dbContext.PerformDbRequest(db => db.QuerySingle<TEntity>(query, paramModel));
+        }
+
+        public TAggregate ExecuteAggregateQuery<TAggregate>(string query, object paramModel = null)
+        {
+            return dbContext.PerformDbRequest(db => db.Query<TAggregate>(query, paramModel)).FirstOrDefault();
         }
 
         public void ExecuteSP(string spName, object paramModel = null)

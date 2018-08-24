@@ -7,29 +7,39 @@ namespace TicketMS.API.Infrastructure.Helpers
 {
     public class ParametersHelper
     {
-        public static DynamicParameters CreateFromAnonymousObject(object parameters, bool includeReturnedId = false)
+        public static DynamicParameters CreateIdParameter(int id)
+        {
+            var param = new DynamicParameters();
+            param.Add(Constants.ID_PARAMETER_NAME, id);
+            return param;
+        }
+
+        public static DynamicParameters CreateFromObject(params object[] parameters)
         {
             var dynamicParameters = new DynamicParameters();
-            var type = parameters.GetType();
 
-            foreach (var prop in type.GetProperties())
+            foreach (var par in parameters)
             {
-                dynamic value = prop.GetValue(parameters);
+                var type = par.GetType();
 
-                if (prop.GetType() == typeof(IEnumerable<int>))
+                foreach (var prop in type.GetProperties())
                 {
-                    value = (value as IEnumerable<int>).AsDataTableParam().AsTableValuedParameter(Constants.IntArrayType);
-                }
-                else if (prop.GetType() == typeof(byte[]))
-                {
-                    dynamicParameters.Add($"@{prop.Name}", value, dbType: DbType.Binary);
-                    continue;
-                }
+                    dynamic value = prop.GetValue(par);
 
-                dynamicParameters.Add($"@{prop.Name}", value);
+                    if (prop.GetType() == typeof(IEnumerable<int>))
+                    {
+                        value = (value as IEnumerable<int>).AsDataTableParam().AsTableValuedParameter(Constants.IntArrayType);
+                    }
+                    else if (prop.GetType() == typeof(byte[]))
+                    {
+                        dynamicParameters.Add($"@{prop.Name.FirstCharToLower()}", value, dbType: DbType.Binary);
+                        continue;
+                    }
+
+                    dynamicParameters.Add($"@{prop.Name.FirstCharToLower()}", value);
+                }
             }
 
-            dynamicParameters.Add(Constants.ID_PARAMETER_NAME, dbType: DbType.Int32, direction: ParameterDirection.ReturnValue);
             return dynamicParameters;
         }
     }

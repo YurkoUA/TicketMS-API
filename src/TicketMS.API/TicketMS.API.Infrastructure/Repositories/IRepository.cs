@@ -16,6 +16,8 @@ namespace TicketMS.API.Infrastructure.Repositories
         IEnumerable<TEntity> ExecuteQuery<TEntity>(string query, object paramModel = null) where TEntity : class;
         TEntity ExecuteQuerySingle<TEntity>(string query, object paramModel = null) where TEntity : class;
 
+        TAggregate ExecuteAggregateQuery<TAggregate>(string query, object paramModel = null);
+
         void ExecuteSP(string spName, object paramModel = null);
         IEnumerable<TEntity> ExecuteSP<TEntity>(string spName, object paramModel = null) where TEntity : class;
         TEntity ExecuteSPSingle<TEntity>(string spName, object paramModel = null) where TEntity : class;

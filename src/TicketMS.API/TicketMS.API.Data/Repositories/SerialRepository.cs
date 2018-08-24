@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using TicketMS.API.Data.Entity;
-using TicketMS.API.Infrastructure;
 using TicketMS.API.Infrastructure.Database;
 using TicketMS.API.Infrastructure.DTO.Serial;
+using TicketMS.API.Infrastructure.Extensions;
 using TicketMS.API.Infrastructure.Helpers;
 using TicketMS.API.Infrastructure.Repositories;
 
@@ -21,32 +21,32 @@ namespace TicketMS.API.Data.Repositories
 
         public SerialEM GetSerial(int id)
         {
-            var param = ParametersHelper.CreateFromAnonymousObject(new { id });
+            var param = ParametersHelper.CreateIdParameter(id);
             return ExecuteQuerySingle<SerialEM>("SELECT * FROM [v_Series] WHERE [Id] = @id", param);
         }
 
         public int CreateSerial(SerialDTO serialDTO)
         {
-            var param = ParametersHelper.CreateFromAnonymousObject(new { name = serialDTO.Name, note = serialDTO.Note }, true);
+            var param = ParametersHelper.CreateFromObject(serialDTO).IncludeReturnedId();
             ExecuteSP("USP_Serial_Create", param);
-            return param.Get<int>(Constants.ID_PARAMETER_NAME);
+            return param.GetReturnedId();
         }
 
         public void EditSerial(int id, SerialDTO serialDTO)
         {
-            var param = ParametersHelper.CreateFromAnonymousObject(new { id, name = serialDTO.Name, note = serialDTO.Note });
+            var param = ParametersHelper.CreateFromObject(serialDTO).IncludeId(id);
             ExecuteSP("USP_Serial_Update", param);
         }
 
         public void DeleteSerial(int id)
         {
-            var param = ParametersHelper.CreateFromAnonymousObject(new { id });
+            var param = ParametersHelper.CreateIdParameter(id);
             ExecuteSP("USP_Serial_Delete", param);
         }
 
         public void SetAsDefault(int id)
         {
-            var param = ParametersHelper.CreateFromAnonymousObject(new { id });
+            var param = ParametersHelper.CreateIdParameter(id);
             ExecuteSP("USP_Serial_SetDefault", param);
         }
     }

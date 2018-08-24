@@ -14,19 +14,19 @@ namespace TicketMS.API.Data.Repositories
 
         public UserEM GetUser(int id)
         {
-            var param = ParametersHelper.CreateFromAnonymousObject(new { id });
+            var param = ParametersHelper.CreateFromObject(new { id });
             return _Get("USP_User_Get", param);
         }
 
         public UserEM FindUser(string emailOrUserName)
         {
-            var param = ParametersHelper.CreateFromAnonymousObject(new { emailOrUserName });
+            var param = ParametersHelper.CreateFromObject(new { emailOrUserName });
             return _Get("USP_User_Find", param);
         }
 
         public void ChangePassword(int id, byte[] passwordHash, byte[] salt)
         {
-            var param = ParametersHelper.CreateFromAnonymousObject(new
+            var param = ParametersHelper.CreateFromObject(new
             {
                 id, passwordHash, salt
             });
