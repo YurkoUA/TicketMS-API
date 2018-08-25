@@ -1,9 +1,13 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TicketMS.API.Data.Entity
 {
+    [Table("Summary")]
     public class SummaryEM
     {
+        [Key]
         public int Id { get; set; }
         public DateTime Date { get; set; }
 
