@@ -24,5 +24,22 @@ namespace TicketMS.API.Data.Entity
 
         public bool IsHappy { get; set; }
         public int? DuplicatesCount { get; set; }
+
+        public static TicketEM MapTicket(TicketEM ticket, PackageEM package, SerialEM serial, ColorEM color, NominalEM nominal)
+        {
+            ticket.Package = package;
+            ticket.Serial = serial;
+            ticket.Color = color;
+            ticket.Nominal = nominal;
+            return ticket;
+        }
+
+        public static TicketEM MapTicket(TicketEM ticket, SerialEM serial, ColorEM color, NominalEM nominal)
+        {
+            ticket.Serial = serial;
+            ticket.Color = color;
+            ticket.Nominal = nominal;
+            return ticket;
+        }
     }
 }

@@ -47,5 +47,31 @@ namespace TicketMS.API.Infrastructure.Repositories
             where TFourth : class
             where TFifth : class
             where TReturn : class;
+
+        IEnumerable<TReturn> ExecuteQuery<TFirst, TSecond, TReturn>(string query, Func<TFirst, TSecond, TReturn> map, string splitOn, object paramModel = null)
+            where TFirst : class
+            where TSecond : class
+            where TReturn : class;
+
+        IEnumerable<TReturn> ExecuteQuery<TFirst, TSecond, TThird, TReturn>(string query, Func<TFirst, TSecond, TThird, TReturn> map, string splitOn, object paramModel = null)
+            where TFirst : class
+            where TSecond : class
+            where TThird : class
+            where TReturn : class;
+
+        IEnumerable<TReturn> ExecuteQuery<TFirst, TSecond, TThird, TFourth, TReturn>(string query, Func<TFirst, TSecond, TThird, TFourth, TReturn> map, string splitOn, object paramModel = null)
+            where TFirst : class
+            where TSecond : class
+            where TThird : class
+            where TFourth : class
+            where TReturn : class;
+
+        IEnumerable<TReturn> ExecuteQuery<TFirst, TSecond, TThird, TFourth, TFifth, TReturn>(string query, Func<TFirst, TSecond, TThird, TFourth, TFifth, TReturn> map, string splitOn, object paramModel = null)
+            where TFirst : class
+            where TSecond : class
+            where TThird : class
+            where TFourth : class
+            where TFifth : class
+            where TReturn : class;
     }
 }

@@ -9,5 +9,11 @@
 
         public byte[] PasswordHash { get; set; }
         public byte[] Salt { get; set; }
+
+        public static UserEM MapUser(UserEM user, RoleEM role)
+        {
+            user.Role = role;
+            return user;
+        }
     }
 }

@@ -20,5 +20,13 @@ namespace TicketMS.API.Data.Entity
 
         public int TicketsCount { get; set; }
         public int? UnallocatedToMoveCount { get; set; }
+
+        public static PackageEM MapPackage(PackageEM package, SerialEM serial, ColorEM color, NominalEM nominal)
+        {
+            package.Serial = serial;
+            package.Color = color;
+            package.Nominal = nominal;
+            return package;
+        }
     }
 }

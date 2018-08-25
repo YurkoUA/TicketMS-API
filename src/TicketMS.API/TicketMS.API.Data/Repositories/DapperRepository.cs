@@ -119,5 +119,43 @@ namespace TicketMS.API.Data.Repositories
         {
             return dbContext.PerformDbRequest(db => db.Query(spName, map, splitOn: splitOn, param: paramModel, commandType: CommandType.StoredProcedure));
         }
+
+        public IEnumerable<TReturn> ExecuteQuery<TFirst, TSecond, TReturn>(string query, Func<TFirst, TSecond, TReturn> map, string splitOn, object paramModel = null)
+            where TFirst : class
+            where TSecond : class
+            where TReturn : class
+        {
+            return dbContext.PerformDbRequest(db => db.Query(query, map, splitOn: splitOn, param: paramModel));
+        }
+
+        public IEnumerable<TReturn> ExecuteQuery<TFirst, TSecond, TThird, TReturn>(string query, Func<TFirst, TSecond, TThird, TReturn> map, string splitOn, object paramModel = null)
+            where TFirst : class
+            where TSecond : class
+            where TThird : class
+            where TReturn : class
+        {
+            return dbContext.PerformDbRequest(db => db.Query(query, map, splitOn: splitOn, param: paramModel));
+        }
+
+        public IEnumerable<TReturn> ExecuteQuery<TFirst, TSecond, TThird, TFourth, TReturn>(string query, Func<TFirst, TSecond, TThird, TFourth, TReturn> map, string splitOn, object paramModel = null)
+            where TFirst : class
+            where TSecond : class
+            where TThird : class
+            where TFourth : class
+            where TReturn : class
+        {
+            return dbContext.PerformDbRequest(db => db.Query(query, map, splitOn: splitOn, param: paramModel));
+        }
+
+        public IEnumerable<TReturn> ExecuteQuery<TFirst, TSecond, TThird, TFourth, TFifth, TReturn>(string query, Func<TFirst, TSecond, TThird, TFourth, TFifth, TReturn> map, string splitOn, object paramModel = null)
+            where TFirst : class
+            where TSecond : class
+            where TThird : class
+            where TFourth : class
+            where TFifth : class
+            where TReturn : class
+        {
+            return dbContext.PerformDbRequest(db => db.Query(query, map, splitOn: splitOn, param: paramModel));
+        }
     }
 }

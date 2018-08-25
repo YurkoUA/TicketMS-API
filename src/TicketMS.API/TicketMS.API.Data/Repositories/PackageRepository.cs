@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using TicketMS.API.Data.Entity;
 using TicketMS.API.Data.Entity.Secondary;
 using TicketMS.API.Infrastructure;
@@ -12,6 +13,9 @@ namespace TicketMS.API.Data.Repositories
 {
     public class PackageRepository : DapperRepository, IPackageRepository
     {
+        const string SPLIT_ON = "SerialId,ColorId,NominalId";
+        const string SPLIT_ON_SHORT = "Id,Id,Id";
+
         public PackageRepository(IDbContext dbContext) : base(dbContext)
         {
         }
@@ -19,37 +23,37 @@ namespace TicketMS.API.Data.Repositories
         public IEnumerable<PackageEM> GetList(bool onlyOpened, bool onlySpecial, IPaging paging)
         {
             var param = ParametersHelper.CreateFromObject(paging, new { onlyOpened, onlySpecial });
-            return ExecuteSP<PackageEM>("USP_Package_GetList", param);
+            return ExecuteSP<PackageEM, SerialEM, ColorEM, NominalEM, PackageEM>("USP_Package_GetList", PackageEM.MapPackage, SPLIT_ON, param);
         }
 
         public IEnumerable<PackageEM> GetBySerial(int serialId)
         {
             var param = ParametersHelper.CreateFromObject(new { serialId });
-            return ExecuteSP<PackageEM>("USP_Package_GetBySerial", param);
+            return ExecuteSP<PackageEM, SerialEM, ColorEM, NominalEM, PackageEM>("USP_Package_GetBySerial", PackageEM.MapPackage, SPLIT_ON, param);
         }
 
         public IEnumerable<PackageEM> GetByColor(int colorId)
         {
             var param = ParametersHelper.CreateFromObject(new { colorId });
-            return ExecuteSP<PackageEM>("USP_Package_GetByColor", param);
+            return ExecuteSP<PackageEM, SerialEM, ColorEM, NominalEM, PackageEM>("USP_Package_GetByColor", PackageEM.MapPackage, SPLIT_ON, param);
         }
 
         public IEnumerable<PackageEM> GetByNominal(int nominalId)
         {
             var param = ParametersHelper.CreateFromObject(new { nominalId });
-            return ExecuteSP<PackageEM>("USP_Package_Nominal", param);
+            return ExecuteSP<PackageEM, SerialEM, ColorEM, NominalEM, PackageEM>("USP_Package_Nominal", PackageEM.MapPackage, SPLIT_ON, param);
         }
 
         public IEnumerable<PackageEM> GetAvailableForTicket(PackageFilterDTO filterDTO)
         {
             var param = ParametersHelper.CreateFromObject(filterDTO);
-            return ExecuteSP<PackageEM>("USP_Package_GetForTicket", param);
+            return ExecuteSP<PackageEM, SerialEM, ColorEM, NominalEM, PackageEM>("USP_Package_GetForTicket", PackageEM.MapPackage, SPLIT_ON, param);
         }
 
         public IEnumerable<PackageEM> Filter(PackageFilterDTO filterDTO)
         {
             var param = ParametersHelper.CreateFromObject(filterDTO);
-            return ExecuteSP<PackageEM>("USP_Package_Filter", param);
+            return ExecuteSP<PackageEM, SerialEM, ColorEM, NominalEM, PackageEM>("USP_Package_Filter", PackageEM.MapPackage, SPLIT_ON, param);
         }
 
         public PackagesTotalEM CountPackages()
@@ -60,13 +64,13 @@ namespace TicketMS.API.Data.Repositories
         public IEnumerable<PackageEM> Find(string name)
         {
             var param = ParametersHelper.CreateFromObject(new { name });
-            return ExecuteSP<PackageEM>("USP_Package_Find", param);
+            return ExecuteSP<PackageEM, SerialEM, ColorEM, NominalEM, PackageEM>("USP_Package_Find", PackageEM.MapPackage, SPLIT_ON, param);
         }
 
         public PackageEM GetPackage(int id)
         {
             var param = ParametersHelper.CreateIdParameter(id);
-            return ExecuteSPSingle<PackageEM>("USP_Package_Get", param);
+            return ExecuteSP<PackageEM, SerialEM, ColorEM, NominalEM, PackageEM>("USP_Package_Get", PackageEM.MapPackage, SPLIT_ON_SHORT, param).FirstOrDefault();
         }
 
         public int CreateDefaultPackage(PackageDefaultDTO packageDTO)

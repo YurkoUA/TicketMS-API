@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using TicketMS.API.Data.Entity;
 using TicketMS.API.Data.Entity.Secondary;
 using TicketMS.API.Infrastructure;
@@ -13,6 +14,10 @@ namespace TicketMS.API.Data.Repositories
 {
     public class TicketRepository : DapperRepository, ITicketRepository
     {
+        const string SPLIT_ON = "PackageId,SerialId,ColorId,NominalId";
+        const string SPLIT_ON_UNALLOCATED = "SerialId,ColorId,NominalId";
+        const string SPLIT_ON_SHORT = "Id,Id,Id,Id";
+
         public TicketRepository(IDbContext dbContext) : base(dbContext)
         {
         }
@@ -20,57 +25,67 @@ namespace TicketMS.API.Data.Repositories
         public IEnumerable<TicketEM> GetTickets(IPaging paging)
         {
             var param = ParametersHelper.CreateFromObject(paging);
-            return ExecuteSP<TicketEM>("USP_Ticket_GetList", param);
+            return ExecuteSP<TicketEM, PackageEM, SerialEM, ColorEM, NominalEM, TicketEM>("USP_Ticket_GetList", 
+                TicketEM.MapTicket, SPLIT_ON, param);
         }
 
         public IEnumerable<TicketEM> GetTickets(DateTime startDate, DateTime endDate)
         {
             var param = ParametersHelper.CreateFromObject(new { startDate, endDate });
-            return ExecuteSP<TicketEM>("USP_Ticket_GetBetweenDates", param);
+            return ExecuteSP<TicketEM, PackageEM, SerialEM, ColorEM, NominalEM, TicketEM>("USP_Ticket_GetBetweenDates", 
+                TicketEM.MapTicket, SPLIT_ON, param);
         }
 
         public IEnumerable<TicketEM> GetHappyTickets(IPaging paging)
         {
             var param = ParametersHelper.CreateFromObject(paging);
-            return ExecuteSP<TicketEM>("USP_Ticket_GetListHappy", param);
+            return ExecuteSP<TicketEM, PackageEM, SerialEM, ColorEM, NominalEM, TicketEM>("USP_Ticket_GetListHappy", 
+                TicketEM.MapTicket, SPLIT_ON, param);
         }
 
         public IEnumerable<TicketEM> GetUnallocatedTickets()
         {
-            return ExecuteQuery<TicketEM>("SELECT * FROM [v_TicketsUnallocated]");
+            return ExecuteQuery<TicketEM, SerialEM, ColorEM, NominalEM, TicketEM>("SELECT * FROM [v_TicketsUnallocated]", 
+                TicketEM.MapTicket, SPLIT_ON_UNALLOCATED);
         }
 
         public IEnumerable<TicketEM> GetReversibleTickets()
         {
-            return ExecuteQuery<TicketEM>("SELECT * FROM [v_TicketsReversible]");
+            return ExecuteQuery<TicketEM, PackageEM, SerialEM, ColorEM, NominalEM, TicketEM>("SELECT * FROM [v_TicketsReversible]", 
+                TicketEM.MapTicket, SPLIT_ON);
         }
 
         public IEnumerable<TicketEM> GetConsistentTickets()
         {
-            return ExecuteQuery<TicketEM>("SELECT * FROM [v_TicketsConsistent]");
+            return ExecuteQuery<TicketEM, PackageEM, SerialEM, ColorEM, NominalEM, TicketEM>("SELECT * FROM [v_TicketsConsistent]", 
+                TicketEM.MapTicket, SPLIT_ON);
         }
 
         public IEnumerable<TicketEM> GetDuplicatedTickets()
         {
-            return ExecuteQuery<TicketEM>("SELECT * FROM [v_TicketsDuplicates]");
+            return ExecuteQuery<TicketEM, PackageEM, SerialEM, ColorEM, NominalEM, TicketEM>("SELECT * FROM [v_TicketsDuplicates]", 
+                TicketEM.MapTicket, SPLIT_ON);
         }
 
         public IEnumerable<TicketEM> GetByPackage(int packageId)
         {
             var param = ParametersHelper.CreateFromObject(new { packageId });
-            return ExecuteSP<TicketEM>("USP_Ticket_GetByPackage", param);
+            return ExecuteSP<TicketEM, PackageEM, SerialEM, ColorEM, NominalEM, TicketEM>("USP_Ticket_GetByPackage", 
+                TicketEM.MapTicket, SPLIT_ON, param);
         }
 
         public IEnumerable<TicketEM> GetDuplicatesWith(int id)
         {
             var param = ParametersHelper.CreateIdParameter(id);
-            return ExecuteSP<TicketEM>("USP_Ticket_GetDuplicatesWith", param);
+            return ExecuteSP<TicketEM, PackageEM, SerialEM, ColorEM, NominalEM, TicketEM>("USP_Ticket_GetDuplicatesWith", 
+                TicketEM.MapTicket, SPLIT_ON, param);
         }
 
         public IEnumerable<TicketEM> Filter(TicketFilterDTO filterDTO, IPaging paging)
         {
             var param = ParametersHelper.CreateFromObject(filterDTO, paging);
-            return ExecuteSP<TicketEM>("USP_Ticket_Filter", param);
+            return ExecuteSP<TicketEM, PackageEM, SerialEM, ColorEM, NominalEM, TicketEM>("USP_Ticket_Filter", 
+                TicketEM.MapTicket, SPLIT_ON, param);
         }
 
         public TicketsTotalEM CountTickets()
@@ -88,12 +103,14 @@ namespace TicketMS.API.Data.Repositories
         public TicketEM GetTicket(int id)
         {
             var param = ParametersHelper.CreateIdParameter(id);
-            return ExecuteSPSingle<TicketEM>("USP_Ticket_Get", param);
+            return ExecuteSP<TicketEM, PackageEM, SerialEM, ColorEM, NominalEM, TicketEM>("USP_Ticket_Get", TicketEM.MapTicket, SPLIT_ON_SHORT, param)
+                .FirstOrDefault();
         }
 
         public TicketEM GetRandomTicket()
         {
-            return ExecuteSPSingle<TicketEM>("USP_Ticket_GetRandom");
+            return ExecuteSP<TicketEM, PackageEM, SerialEM, ColorEM, NominalEM, TicketEM>("USP_Ticket_GetRandom", TicketEM.MapTicket, SPLIT_ON_SHORT)
+                .FirstOrDefault();
         }
 
         public int CreateTicket(TicketDTO ticketDTO)
