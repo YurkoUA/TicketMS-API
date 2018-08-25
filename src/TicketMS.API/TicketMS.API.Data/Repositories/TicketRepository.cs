@@ -114,6 +114,12 @@ namespace TicketMS.API.Data.Repositories
             Delete<TicketEM>(id);
         }
 
+        public void ChangeNumber(int id, string number)
+        {
+            var param = ParametersHelper.CreateFromObject(new { number }).IncludeId(id);
+            ExecuteSP("USP_Ticket_ChangeNumber", param);
+        }
+
         public void MoveTicket(int ticketId, int packageId)
         {
             var param = ParametersHelper.CreateFromObject(new { ticketId, packageId });

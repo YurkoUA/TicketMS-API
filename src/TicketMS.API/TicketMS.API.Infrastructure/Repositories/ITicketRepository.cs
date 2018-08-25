@@ -32,6 +32,7 @@ namespace TicketMS.API.Infrastructure.Repositories
         void EditTicket(int id, TicketDTO ticketDTO);
         void DeleteTicket(int id);
 
+        void ChangeNumber(int id, string number);
         void MoveTicket(int ticketId, int packageId);
         void MoveManyTickets(IEnumerable<int> ticketsIds, int packageId);
 
