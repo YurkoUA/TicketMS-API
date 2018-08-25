@@ -17,7 +17,6 @@ namespace TicketMS.API.Infrastructure.Repositories
         IEnumerable<PackageEM> Filter(PackageFilterDTO filterDTO);
 
         PackagesTotalEM CountPackages();
-        int CountPackages(PackageFilterDTO filterDTO);
 
         IEnumerable<PackageEM> Find(string name);
 
@@ -36,5 +35,6 @@ namespace TicketMS.API.Infrastructure.Repositories
         void DeletePackage(int id);
         
         bool Exists(string name);
+        bool Exists(string name, int id);
     }
 }

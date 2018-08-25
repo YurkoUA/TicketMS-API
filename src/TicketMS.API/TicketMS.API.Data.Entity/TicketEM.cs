@@ -1,9 +1,13 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TicketMS.API.Data.Entity
 {
+    [Table("Ticket")]
     public class TicketEM
     {
+        [Key]
         public int Id { get; set; }
         public string Number { get; set; }
 

@@ -20,7 +20,7 @@ namespace TicketMS.API.Infrastructure.Repositories
         IEnumerable<TicketEM> GetByPackage(int packageId);
         IEnumerable<TicketEM> GetDuplicatesWith(int id);
 
-        IEnumerable<TicketEM> Filter(TicketFilterDTO filterDTO);
+        IEnumerable<TicketEM> Filter(TicketFilterDTO filterDTO, IPaging paging);
 
         TicketsTotalEM CountTickets();
         int CountTickets(TicketFilterDTO filterDTO);
@@ -36,5 +36,7 @@ namespace TicketMS.API.Infrastructure.Repositories
         void MoveManyTickets(IEnumerable<int> ticketsIds, int packageId);
 
         bool NumberExists(string number);
+        bool Exists(string number, int colorId, int serialId, string serialNumber);
+        bool Exists(string number, int colorId, int serialId, string serialNumber, int id);
     }
 }

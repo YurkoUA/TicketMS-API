@@ -1,9 +1,7 @@
 ﻿namespace TicketMS.API.Infrastructure.DTO.Ticket
 {
-    public class TicketFilterDTO : FilterDTO, IPaging
+    public class TicketFilterDTO : FilterDTO
     {
         public bool OnlyUnallocated { get; set; }
-        public int Offset { get; set; }
-        public int Take { get; set; }
     }
 }
