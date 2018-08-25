@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TicketMS.API.Data.Entity;
 using TicketMS.API.Data.Entity.Secondary;
 using TicketMS.API.Infrastructure.DTO.Ticket;
@@ -9,7 +8,7 @@ namespace TicketMS.API.Infrastructure.Repositories
     public interface ITicketRepository : IRepository
     {
         IEnumerable<TicketEM> GetTickets(IPaging paging);
-        IEnumerable<TicketEM> GetTickets(DateTime startDate, DateTime endDate);
+        IEnumerable<TicketEM> GetTickets(IDateRange dateRange);
 
         IEnumerable<TicketEM> GetHappyTickets(IPaging paging);
         IEnumerable<TicketEM> GetUnallocatedTickets();

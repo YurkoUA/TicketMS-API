@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using TicketMS.API.Data.Entity.Secondary.Statistics;
+using TicketMS.API.Infrastructure;
 using TicketMS.API.Infrastructure.Database;
-using TicketMS.API.Infrastructure.DTO;
 using TicketMS.API.Infrastructure.Helpers;
 using TicketMS.API.Infrastructure.Repositories;
 
@@ -13,34 +13,34 @@ namespace TicketMS.API.Data.Repositories
         {
         }
 
-        public IEnumerable<StatisticsEM> GetByFirstDigit(DateRangeDTO rangeDTO)
+        public IEnumerable<StatisticsEM> GetByFirstDigit(IDateRange dateRange)
         {
-            return _GetStatistics<StatisticsEM>("USP_Statistics_FirstDigit", rangeDTO);
+            return _GetStatistics<StatisticsEM>("USP_Statistics_FirstDigit", dateRange);
         }
 
-        public IEnumerable<StatisticsEM> GetBySerial(DateRangeDTO rangeDTO)
+        public IEnumerable<StatisticsEM> GetBySerial(IDateRange dateRange)
         {
-            return _GetStatistics<StatisticsEM>("USP_Statistics_Series", rangeDTO);
+            return _GetStatistics<StatisticsEM>("USP_Statistics_Series", dateRange);
         }
 
-        public IEnumerable<StatisticsEM> GetHappyByFirstDigit(DateRangeDTO rangeDTO)
+        public IEnumerable<StatisticsEM> GetHappyByFirstDigit(IDateRange dateRange)
         {
-            return _GetStatistics<StatisticsEM>("USP_Statistics_HappyByFirstDigit", rangeDTO);
+            return _GetStatistics<StatisticsEM>("USP_Statistics_HappyByFirstDigit", dateRange);
         }
 
-        public IEnumerable<StatisticsEM> GetHappyBySerial(DateRangeDTO rangeDTO)
+        public IEnumerable<StatisticsEM> GetHappyBySerial(IDateRange dateRange)
         {
-            return _GetStatistics<StatisticsEM>("USP_Statistics_HappyBySerial", rangeDTO);
+            return _GetStatistics<StatisticsEM>("USP_Statistics_HappyBySerial", dateRange);
         }
 
-        public IEnumerable<ColorStatisticsEM> GetByColor(DateRangeDTO rangeDTO)
+        public IEnumerable<ColorStatisticsEM> GetByColor(IDateRange dateRange)
         {
-            return _GetStatistics<ColorStatisticsEM>("USP_Statistics_Colors", rangeDTO);
+            return _GetStatistics<ColorStatisticsEM>("USP_Statistics_Colors", dateRange);
         }
 
-        private IEnumerable<TStatistics> _GetStatistics<TStatistics>(string spName, DateRangeDTO rangeDTO) where TStatistics : class
+        private IEnumerable<TStatistics> _GetStatistics<TStatistics>(string spName, IDateRange dateRange) where TStatistics : class
         {
-            return ExecuteSP<TStatistics>(spName, ParametersHelper.CreateFromObject(rangeDTO));
+            return ExecuteSP<TStatistics>(spName, ParametersHelper.CreateFromObject(dateRange));
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using TicketMS.API.Data.Entity;
 using TicketMS.API.Data.Entity.Secondary;
@@ -29,9 +28,9 @@ namespace TicketMS.API.Data.Repositories
                 TicketEM.MapTicket, SPLIT_ON, param);
         }
 
-        public IEnumerable<TicketEM> GetTickets(DateTime startDate, DateTime endDate)
+        public IEnumerable<TicketEM> GetTickets(IDateRange dateRange)
         {
-            var param = ParametersHelper.CreateFromObject(new { startDate, endDate });
+            var param = ParametersHelper.CreateFromObject(dateRange);
             return ExecuteSP<TicketEM, PackageEM, SerialEM, ColorEM, NominalEM, TicketEM>("USP_Ticket_GetBetweenDates", 
                 TicketEM.MapTicket, SPLIT_ON, param);
         }
