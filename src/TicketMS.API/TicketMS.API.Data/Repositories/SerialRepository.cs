@@ -19,6 +19,11 @@ namespace TicketMS.API.Data.Repositories
             return ExecuteQuery<SerialEM>("SELECT * FROM [v_Series]");
         }
 
+        public IEnumerable<SerialEM> GetSeriesForSelectList()
+        {
+            return ExecuteQuery<SerialEM>("SELECT [Id], [Name], [IsDefault] FROM [Serial] ORDER BY [Name]");
+        }
+
         public SerialEM GetSerial(int id)
         {
             var param = ParametersHelper.CreateIdParameter(id);

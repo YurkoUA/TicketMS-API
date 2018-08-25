@@ -7,6 +7,7 @@ namespace TicketMS.API.Infrastructure.Repositories
     public interface IColorRepository : IRepository
     {
         IEnumerable<ColorEM> GetAllColors();
+        IEnumerable<ColorEM> GetColorsForSelectList();
         ColorEM GetColor(int id);
 
         int CreateColor(ColorDTO colorDTO);

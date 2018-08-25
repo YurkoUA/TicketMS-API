@@ -18,6 +18,11 @@ namespace TicketMS.API.Data.Repositories
             return ExecuteQuery<NominalEM>("SELECT * FROM [v_Nominals]");
         }
 
+        public IEnumerable<NominalEM> GetNominalsForSelectList()
+        {
+            return ExecuteQuery<NominalEM>("SELECT [Id], [Value], [IsDefault] FROM [Nominal] ORDER BY [Value]");
+        }
+
         public NominalEM GetNominal(int id)
         {
             var param = ParametersHelper.CreateIdParameter(id);

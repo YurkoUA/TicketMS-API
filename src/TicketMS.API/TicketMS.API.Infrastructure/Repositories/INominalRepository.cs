@@ -6,6 +6,7 @@ namespace TicketMS.API.Infrastructure.Repositories
     public interface INominalRepository : IRepository
     {
         IEnumerable<NominalEM> GetAllNominals();
+        IEnumerable<NominalEM> GetNominalsForSelectList();
         NominalEM GetNominal(int id);
 
         int CreateNominal(double value);

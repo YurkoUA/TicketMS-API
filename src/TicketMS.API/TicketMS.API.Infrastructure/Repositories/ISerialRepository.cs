@@ -7,6 +7,7 @@ namespace TicketMS.API.Infrastructure.Repositories
     public interface ISerialRepository : IRepository
     {
         IEnumerable<SerialEM> GetAllSeries();
+        IEnumerable<SerialEM> GetSeriesForSelectList();
         SerialEM GetSerial(int id);
 
         int CreateSerial(SerialDTO serialDTO);

@@ -19,6 +19,11 @@ namespace TicketMS.API.Data.Repositories
             return ExecuteQuery<ColorEM>("SELECT * FROM [v_Colors]");
         }
 
+        public IEnumerable<ColorEM> GetColorsForSelectList()
+        {
+            return ExecuteQuery<ColorEM>("SELECT [Id], [Name] FROM [Color] ORDER BY [Name]");
+        }
+
         public ColorEM GetColor(int id)
         {
             var param = ParametersHelper.CreateIdParameter(id);
