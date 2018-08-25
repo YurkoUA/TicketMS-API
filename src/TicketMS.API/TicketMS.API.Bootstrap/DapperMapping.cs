@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Dapper;
 using TicketMS.API.Data.Entity;
 
@@ -31,30 +32,26 @@ namespace TicketMS.API.Bootstrap
 
         internal static void ConfigureCustomMapping()
         {
-            var mapper = CreateCustomMapper(generalMaps);
-
-            SqlMapper.SetTypeMap(typeof(PackageEM), mapper);
-            SqlMapper.SetTypeMap(typeof(TicketEM), mapper);
-
-            ConfigureForReports();
+            ConfigureMappers(generalMaps, typeof(NominalEM), typeof(ColorEM), typeof(SerialEM), typeof(PackageEM), typeof(TicketEM));
+            ConfigureMappers(reportMaps, typeof(ReportEM), typeof(ReportDocumentEM), typeof(ReportTypeEM));
         }
 
-        private static void ConfigureForReports()
+        private static void ConfigureMappers(Dictionary<string, string> map, params Type[] types)
         {
-            var mapper = CreateCustomMapper(reportMaps);
-            SqlMapper.SetTypeMap(typeof(ReportEM), mapper);
-            SqlMapper.SetTypeMap(typeof(ReportDocumentEM), mapper);
-            SqlMapper.SetTypeMap(typeof(ReportTypeEM), mapper);
+            foreach (var t in types)
+            {
+                SqlMapper.SetTypeMap(t, CreateMapper(t, map));
+            }
         }
 
-        private static CustomPropertyTypeMap CreateCustomMapper(Dictionary<string, string> map)
+        private static CustomPropertyTypeMap CreateMapper(Type type, Dictionary<string, string> map)
         {
-            return new CustomPropertyTypeMap(typeof(NominalEM), (type, columnName) =>
+            return new CustomPropertyTypeMap(type, (t, columnName) =>
             {
                 if (map.ContainsKey(columnName))
-                    return type.GetProperty(map[columnName]);
+                    return t.GetProperty(map[columnName]);
 
-                return type.GetProperty(columnName);
+                return t.GetProperty(columnName);
             });
         }
     }
