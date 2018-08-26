@@ -3,6 +3,7 @@
     public class Constants
     {
         public const string IntArrayType = "IntArrayType";
+        public const string UDT_ReportDocument = "UDT_ReportDocument";
 
         public const string ID_PARAMETER_NAME = "@id";
     }

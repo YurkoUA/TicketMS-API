@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using Dapper;
+using TicketMS.API.Infrastructure.DTO.Report;
 using TicketMS.API.Infrastructure.Extensions;
 
 namespace TicketMS.API.Infrastructure.Helpers
@@ -29,6 +30,10 @@ namespace TicketMS.API.Infrastructure.Helpers
                     if (prop.GetType() == typeof(IEnumerable<int>))
                     {
                         value = (value as IEnumerable<int>).AsDataTableParam().AsTableValuedParameter(Constants.IntArrayType);
+                    }
+                    else if (prop.GetType() == typeof(IEnumerable<ReportDocumentDTO>))
+                    {
+                        value = (value as IEnumerable<ReportDocumentDTO>).AsDataTableParam().AsTableValuedParameter(Constants.UDT_ReportDocument);
                     }
                     else if (prop.GetType() == typeof(byte[]))
                     {
