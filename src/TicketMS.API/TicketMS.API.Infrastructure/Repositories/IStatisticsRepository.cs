@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
-using TicketMS.API.Data.Entity.Secondary.Statistics;
+using TicketMS.API.Infrastructure.DTO.Statistics;
 
 namespace TicketMS.API.Infrastructure.Repositories
 {
     public interface IStatisticsRepository
     {
-        IEnumerable<StatisticsEM> GetByFirstDigit(IDateRange dateRange);
-        IEnumerable<StatisticsEM> GetBySerial(IDateRange dateRange);
+        IEnumerable<StatisticsDTO> GetByFirstDigit(IDateRange dateRange);
+        IEnumerable<StatisticsDTO> GetBySerial(IDateRange dateRange);
 
-        IEnumerable<StatisticsEM> GetHappyByFirstDigit(IDateRange dateRange);
-        IEnumerable<StatisticsEM> GetHappyBySerial(IDateRange dateRange);
+        IEnumerable<StatisticsDTO> GetHappyByFirstDigit(IDateRange dateRange);
+        IEnumerable<StatisticsDTO> GetHappyBySerial(IDateRange dateRange);
 
-        IEnumerable<ColorStatisticsEM> GetByColor(IDateRange dateRange);
+        IEnumerable<ColorStatisticsDTO> GetByColor(IDateRange dateRange);
     }
 }

@@ -1,6 +1,6 @@
-﻿namespace TicketMS.API.Data.Entity.Secondary.Statistics
+﻿namespace TicketMS.API.Infrastructure.DTO.Statistics
 {
-    public class StatisticsEM
+    public class StatisticsDTO
     {
         public string Name { get; set; }
         public int Count { get; set; }

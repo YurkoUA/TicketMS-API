@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using TicketMS.API.Data.Entity.Secondary.Report;
 using TicketMS.API.Infrastructure;
 using TicketMS.API.Infrastructure.Database;
+using TicketMS.API.Infrastructure.DTO.Report;
 using TicketMS.API.Infrastructure.Helpers;
 using TicketMS.API.Infrastructure.Repositories;
 
@@ -13,33 +13,33 @@ namespace TicketMS.API.Data.Repositories
         {
         }
 
-        public TicketsTotalEM GetTicketsTotal(IDateRange dateRange)
+        public TicketsTotalDTO GetTicketsTotal(IDateRange dateRange)
         {
             var param = ParametersHelper.CreateFromObject(dateRange);
-            return ExecuteSPSingle<TicketsTotalEM>("USP_Report_TicketsTotal", param);
+            return ExecuteSPSingle<TicketsTotalDTO>("USP_Report_TicketsTotal", param);
         }
 
-        public PackagesTotalEM GetPackagesTotal(IDateRange dateRange)
+        public PackagesTotalDTO GetPackagesTotal(IDateRange dateRange)
         {
             var param = ParametersHelper.CreateFromObject(dateRange);
-            return ExecuteSPSingle<PackagesTotalEM>("USP_Report_PackagesTotal", param);
+            return ExecuteSPSingle<PackagesTotalDTO>("USP_Report_PackagesTotal", param);
         }
 
-        public TicketsFromDefaultPackagesAndUnallocatedEM GetTicketsFromDefaultPackagesAndUnallocated()
+        public TicketsFromDefaultPackagesAndUnallocatedDTO GetTicketsFromDefaultPackagesAndUnallocated()
         {
-            return ExecuteSPSingle<TicketsFromDefaultPackagesAndUnallocatedEM>("USP_Report_TicketsFromDefaultAndUnallocatedPackages");
+            return ExecuteSPSingle<TicketsFromDefaultPackagesAndUnallocatedDTO>("USP_Report_TicketsFromDefaultAndUnallocatedPackages");
         }
 
-        public IEnumerable<PackageSummaryEM> GetDefaultPackages(IDateRange dateRange)
-        {
-            var param = ParametersHelper.CreateFromObject(dateRange);
-            return ExecuteSP<PackageSummaryEM>("USP_Report_DefaultPackages", param);
-        }
-
-        public IEnumerable<PackageSummaryEM> GetSpecialPackages(IDateRange dateRange)
+        public IEnumerable<PackageSummaryDTO> GetDefaultPackages(IDateRange dateRange)
         {
             var param = ParametersHelper.CreateFromObject(dateRange);
-            return ExecuteSP<PackageSummaryEM>("USP_Report_SpecialPackages", param);
+            return ExecuteSP<PackageSummaryDTO>("USP_Report_DefaultPackages", param);
+        }
+
+        public IEnumerable<PackageSummaryDTO> GetSpecialPackages(IDateRange dateRange)
+        {
+            var param = ParametersHelper.CreateFromObject(dateRange);
+            return ExecuteSP<PackageSummaryDTO>("USP_Report_SpecialPackages", param);
         }
     }
 }

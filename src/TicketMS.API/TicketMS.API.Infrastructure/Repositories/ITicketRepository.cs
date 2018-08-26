@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using TicketMS.API.Data.Entity;
-using TicketMS.API.Data.Entity.Secondary;
 using TicketMS.API.Infrastructure.DTO.Ticket;
 
 namespace TicketMS.API.Infrastructure.Repositories
@@ -22,7 +21,7 @@ namespace TicketMS.API.Infrastructure.Repositories
 
         IEnumerable<TicketEM> Filter(TicketFilterDTO filterDTO, IPaging paging);
 
-        TicketsTotalEM CountTickets();
+        TicketsTotalDTO CountTickets();
         int CountTickets(TicketFilterDTO filterDTO);
 
         TicketEM GetTicket(int id);

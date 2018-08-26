@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using TicketMS.API.Data.Entity;
-using TicketMS.API.Data.Entity.Secondary;
 using TicketMS.API.Infrastructure;
 using TicketMS.API.Infrastructure.Database;
 using TicketMS.API.Infrastructure.DTO.Package;
@@ -56,9 +55,9 @@ namespace TicketMS.API.Data.Repositories
             return ExecuteSP<PackageEM, SerialEM, ColorEM, NominalEM, PackageEM>("USP_Package_Filter", PackageEM.MapPackage, SPLIT_ON, param);
         }
 
-        public PackagesTotalEM CountPackages()
+        public PackagesTotalDTO CountPackages()
         {
-            return ExecuteQuerySingle<PackagesTotalEM>("SELECT * FROM [v_PackagesTotal]");
+            return ExecuteQuerySingle<PackagesTotalDTO>("SELECT * FROM [v_PackagesTotal]");
         }
 
         public IEnumerable<PackageEM> Find(string name)

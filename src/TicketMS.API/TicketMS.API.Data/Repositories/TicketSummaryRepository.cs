@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using TicketMS.API.Data.Entity.Secondary;
+﻿using System.Collections.Generic;
+using TicketMS.API.Infrastructure;
 using TicketMS.API.Infrastructure.Database;
+using TicketMS.API.Infrastructure.DTO.Ticket;
 using TicketMS.API.Infrastructure.Helpers;
 using TicketMS.API.Infrastructure.Repositories;
 
@@ -13,21 +13,21 @@ namespace TicketMS.API.Data.Repositories
         {
         }
 
-        public IEnumerable<SummaryTicketsEM> GetSummary(DateTime startDate, DateTime endDate)
+        public IEnumerable<SummaryTicketsDTO> GetSummary(IDateRange dateRange)
         {
-            var param = ParametersHelper.CreateFromObject(new { startDate, endDate });
-            return ExecuteSP<SummaryTicketsEM>("USP_Ticket_Summary", param);
+            var param = ParametersHelper.CreateFromObject(dateRange);
+            return ExecuteSP<SummaryTicketsDTO>("USP_Ticket_Summary", param);
         }
 
-        public IEnumerable<SummaryTicketsEM> GetSummaryByUnallocated()
+        public IEnumerable<SummaryTicketsDTO> GetSummaryByUnallocated()
         {
-            return ExecuteQuery<SummaryTicketsEM>("SELECT * FROM [v_TicketsUnallocatedSummary]");
+            return ExecuteQuery<SummaryTicketsDTO>("SELECT * FROM [v_TicketsUnallocatedSummary]");
         }
 
-        public IEnumerable<SummaryTicketsEM> GetSummaryByPackage(int packageId)
+        public IEnumerable<SummaryTicketsDTO> GetSummaryByPackage(int packageId)
         {
             var param = ParametersHelper.CreateFromObject(new { packageId });
-            return ExecuteSP<SummaryTicketsEM>("USP_Ticket_SummaryByPackage", param);
+            return ExecuteSP<SummaryTicketsDTO>("USP_Ticket_SummaryByPackage", param);
         }
     }
 }

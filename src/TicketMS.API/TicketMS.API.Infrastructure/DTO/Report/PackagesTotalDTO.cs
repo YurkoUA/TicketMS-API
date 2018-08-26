@@ -1,6 +1,6 @@
-﻿namespace TicketMS.API.Data.Entity.Secondary.Report
+﻿namespace TicketMS.API.Infrastructure.DTO.Report
 {
-    public class PackagesTotalEM
+    public class PackagesTotalDTO
     {
         public int TotalCount { get; set; }
         public int NewPackagesCount { get; set; }

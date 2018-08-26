@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using TicketMS.API.Data.Entity;
-using TicketMS.API.Data.Entity.Secondary;
 using TicketMS.API.Infrastructure.DTO.Package;
 
 namespace TicketMS.API.Infrastructure.Repositories
@@ -16,7 +15,7 @@ namespace TicketMS.API.Infrastructure.Repositories
 
         IEnumerable<PackageEM> Filter(PackageFilterDTO filterDTO);
 
-        PackagesTotalEM CountPackages();
+        PackagesTotalDTO CountPackages();
 
         IEnumerable<PackageEM> Find(string name);
 

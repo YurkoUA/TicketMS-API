@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using TicketMS.API.Data.Entity;
-using TicketMS.API.Data.Entity.Secondary;
 using TicketMS.API.Infrastructure;
 using TicketMS.API.Infrastructure.Database;
 using TicketMS.API.Infrastructure.DTO.Ticket;
@@ -94,9 +93,9 @@ namespace TicketMS.API.Data.Repositories
                 TicketEM.MapTicket, SPLIT_ON, param);
         }
 
-        public TicketsTotalEM CountTickets()
+        public TicketsTotalDTO CountTickets()
         {
-            return ExecuteQuerySingle<TicketsTotalEM>("SELECT * FROM [v_TicketsTotal]");
+            return ExecuteQuerySingle<TicketsTotalDTO>("SELECT * FROM [v_TicketsTotal]");
         }
 
         public int CountTickets(TicketFilterDTO filterDTO)

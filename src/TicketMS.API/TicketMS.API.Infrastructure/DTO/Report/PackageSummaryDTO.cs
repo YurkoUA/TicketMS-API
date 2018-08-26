@@ -1,6 +1,6 @@
-﻿namespace TicketMS.API.Data.Entity.Secondary.Report
+﻿namespace TicketMS.API.Infrastructure.DTO.Report
 {
-    public class PackageSummaryEM
+    public class PackageSummaryDTO
     {
         public int Id { get; set; }
         public string Name { get; set; }
