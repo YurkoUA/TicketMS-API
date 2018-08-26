@@ -17,6 +17,7 @@ namespace TicketMS.API.Infrastructure.Repositories
         IEnumerable<TicketEM> GetDuplicatedTickets();
 
         IEnumerable<TicketEM> GetByPackage(int packageId);
+        IEnumerable<TicketEM> GetByNote(string note);
         IEnumerable<TicketEM> GetDuplicatesWith(int id);
 
         IEnumerable<TicketEM> Filter(TicketFilterDTO filterDTO, IPaging paging);

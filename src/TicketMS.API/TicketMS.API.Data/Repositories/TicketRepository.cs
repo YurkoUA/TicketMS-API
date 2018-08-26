@@ -73,6 +73,13 @@ namespace TicketMS.API.Data.Repositories
                 TicketEM.MapTicket, SPLIT_ON, param);
         }
 
+        public IEnumerable<TicketEM> GetByNote(string note)
+        {
+            var param = ParametersHelper.CreateFromObject(new { note });
+            return ExecuteSP<TicketEM, PackageEM, SerialEM, ColorEM, NominalEM, TicketEM>("USP_Ticket_GetByNote",
+                TicketEM.MapTicket, SPLIT_ON, param);
+        }
+
         public IEnumerable<TicketEM> GetDuplicatesWith(int id)
         {
             var param = ParametersHelper.CreateIdParameter(id);
