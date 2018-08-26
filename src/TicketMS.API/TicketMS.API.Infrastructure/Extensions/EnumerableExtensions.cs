@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data;
+using System.Text;
 using TicketMS.API.Infrastructure.DTO.Report;
 
 namespace TicketMS.API.Infrastructure.Extensions
@@ -38,6 +39,18 @@ namespace TicketMS.API.Infrastructure.Extensions
             }
 
             return table;
+        }
+
+        public static byte[] ToBytes(this IEnumerable<string> values)
+        {
+            var bytes = new List<byte>();
+
+            foreach (var str in values)
+            {
+                bytes.AddRange(Encoding.UTF8.GetBytes(str));
+            }
+
+            return bytes.ToArray();
         }
     }
 }
