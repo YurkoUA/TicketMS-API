@@ -112,7 +112,7 @@ namespace TicketMS.API.Data.Repositories
                 .FirstOrDefault();
         }
 
-        public int CreateTicket(TicketDTO ticketDTO)
+        public int CreateTicket(TicketCreateDTO ticketDTO)
         {
             var param = ParametersHelper.CreateFromObject(ticketDTO).IncludeReturnedId();
             ExecuteSP("USP_Ticket_Create", param);

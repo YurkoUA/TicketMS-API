@@ -7,7 +7,7 @@ namespace TicketMS.API.Bootstrap
 {
     internal static class DapperMapping
     {
-        private static Dictionary<string, string> generalMaps = new Dictionary<string, string>
+        private static readonly Dictionary<string, string> generalMaps = new Dictionary<string, string>
         {
             ["NominalId"] = "Id",
 
@@ -23,7 +23,7 @@ namespace TicketMS.API.Bootstrap
             ["TicketId"] = "Id"         
         };
 
-        private static Dictionary<string, string> reportMaps = new Dictionary<string, string>
+        private static readonly Dictionary<string, string> reportMaps = new Dictionary<string, string>
         {
             ["ReportId"] = "Id",
             ["DocumentId"] = "Id",
@@ -48,10 +48,7 @@ namespace TicketMS.API.Bootstrap
         {
             return new CustomPropertyTypeMap(type, (t, columnName) =>
             {
-                if (map.ContainsKey(columnName))
-                    return t.GetProperty(map[columnName]);
-
-                return t.GetProperty(columnName);
+                return t.GetProperty(map.ContainsKey(columnName) ? map[columnName] : columnName);
             });
         }
     }

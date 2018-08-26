@@ -27,7 +27,7 @@ namespace TicketMS.API.Infrastructure.Repositories
         TicketEM GetTicket(int id);
         TicketEM GetRandomTicket();
 
-        int CreateTicket(TicketDTO ticketDTO);
+        int CreateTicket(TicketCreateDTO ticketDTO);
         void EditTicket(int id, TicketDTO ticketDTO);
         void DeleteTicket(int id);
 
