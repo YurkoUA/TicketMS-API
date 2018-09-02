@@ -15,6 +15,7 @@
     <ProjectReference Include="..\TicketMS.API.Data.Entity\TicketMS.API.Data.Entity.csproj" />
     <ProjectReference Include="..\TicketMS.API.Data\TicketMS.API.Data.csproj" />
     <ProjectReference Include="..\TicketMS.API.Infrastructure\TicketMS.API.Infrastructure.csproj" />
+    <ProjectReference Include="..\TicketMS.API.ViewModels\TicketMS.API.ViewModels.csproj" />
   </ItemGroup>
 
   <ItemGroup>
