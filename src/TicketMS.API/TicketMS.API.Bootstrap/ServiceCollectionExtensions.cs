@@ -1,5 +1,4 @@
-﻿using System;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using Microsoft.Extensions.DependencyInjection;
 using AutoMapper;
 using TicketMS.API.Data;
@@ -8,6 +7,8 @@ using TicketMS.API.Infrastructure.Interfaces;
 using TicketMS.API.Infrastructure.Util;
 using TicketMS.API.Infrastructure.Repositories;
 using TicketMS.API.Data.Repositories;
+using TicketMS.API.Infrastructure.Services;
+using TicketMS.API.Business.Security;
 
 namespace TicketMS.API.Bootstrap
 {

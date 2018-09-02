@@ -1,8 +1,8 @@
-﻿namespace TicketMS.API.Infrastructure.Interfaces
+﻿namespace TicketMS.API.Infrastructure.Services
 {
     public interface ICryptoService
     {
-        byte[] GenerateSalt(int length);
+        byte[] GenerateRandomBytes(int length);
         byte[] ComputeHash(byte[] bytes);
         byte[] Xor(params byte[][] bytes);
     }

@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Linq;
 using System.Security.Cryptography;
-using TicketMS.API.Infrastructure.Interfaces;
+using TicketMS.API.Infrastructure.Services;
 
-namespace TicketMS.API.Infrastructure.Util
+namespace TicketMS.API.Business.Security
 {
     public class CryptoService : ICryptoService
     {
@@ -16,7 +16,7 @@ namespace TicketMS.API.Infrastructure.Util
             this.hashAlgorithm = hashAlgorithm;
         }
 
-        public byte[] GenerateSalt(int length)
+        public byte[] GenerateRandomBytes(int length)
         {
             var salt = new byte[length];
             numberGenerator.GetBytes(salt);
