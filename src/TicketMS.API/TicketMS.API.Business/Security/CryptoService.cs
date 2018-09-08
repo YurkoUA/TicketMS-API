@@ -31,7 +31,7 @@ namespace TicketMS.API.Business.Security
         public byte[] Xor(params byte[][] bytes)
         {
             var size = bytes.First().Length;
-            var xorResult = new BitArray(bytes.First().Length);
+            var xorResult = new BitArray(bytes.First().Length * 8);
 
             foreach (var arr in bytes)
             {
@@ -39,7 +39,7 @@ namespace TicketMS.API.Business.Security
             }
 
             var result = new byte[size];
-            xorResult.CopyTo(result, 1);
+            xorResult.CopyTo(result, 0);
             return result;
         }
     }

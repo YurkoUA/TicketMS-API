@@ -8,7 +8,7 @@ namespace TicketMS.API.Data.Entity
         public int Id { get; set; }
         public string Email { get; set; }
         public string UserName { get; set; }
-        public int TelegramId { get; set; }
+        public int? TelegramId { get; set; }
 
         public RoleEM Role { get; set; }
 

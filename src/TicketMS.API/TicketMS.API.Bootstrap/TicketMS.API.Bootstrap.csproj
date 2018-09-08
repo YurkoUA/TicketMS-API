@@ -8,6 +8,11 @@
     <PackageReference Include="AutoMapper" Version="7.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="5.0.1" />
     <PackageReference Include="Dapper" Version="1.50.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="2.2.0-preview1-35029" />
+    <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.1.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -16,12 +21,6 @@
     <ProjectReference Include="..\TicketMS.API.Data\TicketMS.API.Data.csproj" />
     <ProjectReference Include="..\TicketMS.API.Infrastructure\TicketMS.API.Infrastructure.csproj" />
     <ProjectReference Include="..\TicketMS.API.ViewModels\TicketMS.API.ViewModels.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
-      <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.extensions.dependencyinjection.abstractions\2.1.1\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>

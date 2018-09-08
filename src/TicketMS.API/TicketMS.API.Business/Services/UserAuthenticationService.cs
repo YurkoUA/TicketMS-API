@@ -7,6 +7,7 @@ using TicketMS.API.Infrastructure.Interfaces;
 using TicketMS.API.Infrastructure.Models.Security;
 using TicketMS.API.Infrastructure.Repositories;
 using TicketMS.API.Infrastructure.Services;
+using TicketMS.API.ViewModels.User;
 
 namespace TicketMS.API.Business.Services
 {
@@ -39,14 +40,15 @@ namespace TicketMS.API.Business.Services
             this.jwtOptions = jwtOptions.Value;
         }
 
-        public JsonWebToken Authenticate(string emailOrUserName, string password)
+        public JsonWebToken Authenticate(string emailOrUserName, string password, out UserVM user)
         {
-            var user = userRepository.FindUser(emailOrUserName);
+            var userEM = userRepository.FindUser(emailOrUserName);
 
-            if (user == null || !CheckPassword(user, password))
+            if (userEM == null || !CheckPassword(userEM, password))
                 throw new Exception("User is not found.");
 
-            var claims = claimService.CreateClaims(user);
+            user = mapper.ConvertTo<UserVM>(userEM);
+            var claims = claimService.CreateClaims(userEM);
             return jwtService.CreateJwt(claims, jwtOptions);
         }
 

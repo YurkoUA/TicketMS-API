@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using TicketMS.API.Infrastructure.Configuration;
 using TicketMS.API.Infrastructure.Models.Security;
@@ -21,7 +22,7 @@ namespace TicketMS.API.Business.Security
                 notBefore: utcNow,
                 claims: claims.Claims,
                 expires: expiresDate,
-                signingCredentials: new SigningCredentials(jwtOptions.SignInKey, jwtOptions.SecurityAlgorithm)
+                signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtOptions.Key)), SecurityAlgorithms.RsaSha512Signature)
             );
 
             return new JsonWebToken
