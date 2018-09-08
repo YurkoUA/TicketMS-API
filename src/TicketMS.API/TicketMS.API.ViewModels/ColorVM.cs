@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using TicketMS.API.Infrastructure.Common.Attributes.Validation;
 
-namespace TicketMS.API.ViewModels.Color
+namespace TicketMS.API.ViewModels
 {
     public class ColorVM
     {

@@ -3,7 +3,7 @@
     public class NominalEM
     {
         public int Id { get; set; }
-        public double Price { get; set; }
+        public decimal Value { get; set; }
 
         public bool IsDefault { get; set; }
 

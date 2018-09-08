@@ -9,8 +9,8 @@ namespace TicketMS.API.Infrastructure.Repositories
         IEnumerable<NominalEM> GetNominalsForSelectList();
         NominalEM GetNominal(int id);
 
-        int CreateNominal(double value);
-        void EditNominal(int id, double value);
+        int CreateNominal(decimal value);
+        void EditNominal(int id, decimal value);
         void DeleteNominal(int id);
 
         void SetAsDefault(int id);

@@ -1,4 +1,4 @@
-﻿namespace TicketMS.API.ViewModels
+﻿namespace TicketMS.API.ViewModels.Primitives
 {
     public class Identifier
     {
