@@ -1,11 +1,11 @@
-﻿using TicketMS.API.ViewModels.User;
+﻿using TicketMS.API.Infrastructure.Common.Models.Security;
+using TicketMS.API.ViewModels.User;
 
 namespace TicketMS.API.ViewModels.Account
 {
     public class SignInResponseVM
     {
-        // It's dynamic to avoid circular dependency between ViewModels and Infrastructure projects.
-        public dynamic Token { get; set; }
+        public JsonWebToken Token { get; set; }
         public UserVM User { get; set; }
     }
 }

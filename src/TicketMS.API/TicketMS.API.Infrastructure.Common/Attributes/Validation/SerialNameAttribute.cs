@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 
-namespace TicketMS.API.Infrastructure.Attributes.Validation
+namespace TicketMS.API.Infrastructure.Common.Attributes.Validation
 {
     public class SerialNameAttribute : ValidationAttribute
     {

@@ -13,9 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketMS.API.Data.Entity", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketMS.API.Bootstrap", "TicketMS.API.Bootstrap\TicketMS.API.Bootstrap.csproj", "{844EF0E8-B9CF-49E1-B669-081870D3F18F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketMS.API.Business", "TicketMS.API.Business\TicketMS.API.Business.csproj", "{C6EAAEF8-BE24-4C60-B061-E3FD8F92780D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketMS.API.Business", "TicketMS.API.Business\TicketMS.API.Business.csproj", "{C6EAAEF8-BE24-4C60-B061-E3FD8F92780D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketMS.API.ViewModels", "TicketMS.API.ViewModels\TicketMS.API.ViewModels.csproj", "{694CA234-B76E-49A5-BACA-9A5EB5E0926E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketMS.API.ViewModels", "TicketMS.API.ViewModels\TicketMS.API.ViewModels.csproj", "{694CA234-B76E-49A5-BACA-9A5EB5E0926E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketMS.API.Infrastructure.Common", "TicketMS.API.Infrastructure.Common\TicketMS.API.Infrastructure.Common.csproj", "{4D6CE7F4-EF04-4101-8103-A42276AA4635}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{694CA234-B76E-49A5-BACA-9A5EB5E0926E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{694CA234-B76E-49A5-BACA-9A5EB5E0926E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{694CA234-B76E-49A5-BACA-9A5EB5E0926E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D6CE7F4-EF04-4101-8103-A42276AA4635}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D6CE7F4-EF04-4101-8103-A42276AA4635}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D6CE7F4-EF04-4101-8103-A42276AA4635}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D6CE7F4-EF04-4101-8103-A42276AA4635}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -2,23 +2,22 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 
-namespace TicketMS.API.Infrastructure.Attributes.Validation
+namespace TicketMS.API.Infrastructure.Common.Attributes.Validation
 {
-    public class SerialNumberAttribute : ValidationAttribute
+    public class TicketNumberAttribute : ValidationAttribute
     {
         // TODO: Error message.
 
         public override bool IsValid(object value)
         {
-            if (value is string serialNumber)
+            if (value is string number)
             {
-                if (!Regex.IsMatch(serialNumber, @"^\d{2}$"))
+                if (!Regex.IsMatch(number, @"^\d{6}$"))
                 {
                     return false;
                 }
 
-                var numberInt = int.Parse(serialNumber);
-                return numberInt >= 1 && numberInt <= 50;
+                return !number.Equals("000000");
             }
 
             throw new ArgumentException();
