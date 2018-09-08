@@ -23,6 +23,14 @@ namespace TicketMS.API.Controllers
             ConfigureUserId();
         }
 
+        [NonAction]
+        public IActionResult BadRequestWithErrors(params string[] errors)
+        {
+            return BadRequest(errors);
+        }
+
+        #region Private methods.
+
         private void ConfigureUserId()
         {
             string strId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -34,5 +42,7 @@ namespace TicketMS.API.Controllers
 
             UserToken.UserId = id;
         }
+
+        #endregion
     }
 }
