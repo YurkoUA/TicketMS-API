@@ -6,10 +6,10 @@ namespace TicketMS.API.Infrastructure.Repositories
 {
     public interface ITicketRepository : IRepository
     {
-        IEnumerable<TicketEM> GetTickets(IPaging paging);
+        IEnumerable<TicketEM> GetTickets(IPaging paging, out int totalCount);
         IEnumerable<TicketEM> GetTickets(IDateRange dateRange);
 
-        IEnumerable<TicketEM> GetHappyTickets(IPaging paging);
+        IEnumerable<TicketEM> GetHappyTickets(IPaging paging, out int totalCount);
         IEnumerable<TicketEM> GetUnallocatedTickets();
         IEnumerable<TicketEM> GetReversibleTickets();
         IEnumerable<TicketEM> GetConsistentTickets();
@@ -19,10 +19,8 @@ namespace TicketMS.API.Infrastructure.Repositories
         IEnumerable<TicketEM> GetByNote(string note);
         IEnumerable<TicketEM> GetDuplicatesWith(int id);
 
-        IEnumerable<TicketEM> Filter(TicketFilterDTO filterDTO, IPaging paging);
-
+        IEnumerable<TicketEM> Filter(TicketFilterDTO filterDTO, IPaging paging, out int totalCount);
         TicketsTotalDTO CountTickets();
-        int CountTickets(TicketFilterDTO filterDTO);
 
         TicketEM GetTicket(int id);
         TicketEM GetRandomTicket();

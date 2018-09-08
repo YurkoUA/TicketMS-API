@@ -6,7 +6,7 @@ namespace TicketMS.API.Infrastructure.Repositories
 {
     public interface IPackageRepository : IRepository
     {
-        IEnumerable<PackageEM> GetList(bool onlyOpened, bool onlySpecial, IPaging paging);
+        IEnumerable<PackageEM> GetList(bool onlyOpened, bool onlySpecial, IPaging paging, out int totalCount);
 
         IEnumerable<PackageEM> GetBySerial(int serialId);
         IEnumerable<PackageEM> GetByColor(int colorId);

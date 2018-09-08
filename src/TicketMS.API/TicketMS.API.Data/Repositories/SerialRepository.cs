@@ -32,9 +32,9 @@ namespace TicketMS.API.Data.Repositories
 
         public int CreateSerial(SerialDTO serialDTO)
         {
-            var param = ParametersHelper.CreateFromObject(serialDTO).IncludeReturnedId();
+            var param = ParametersHelper.CreateFromObject(serialDTO).IncludeOutputId();
             ExecuteSP("USP_Serial_Create", param);
-            return param.GetReturnedId();
+            return param.GetOutputId();
         }
 
         public void EditSerial(int id, SerialDTO serialDTO)

@@ -32,9 +32,9 @@ namespace TicketMS.API.Data.Repositories
 
         public int CreateColor(ColorDTO colorDTO)
         {
-            var param = ParametersHelper.CreateFromObject(colorDTO).IncludeReturnedId();
+            var param = ParametersHelper.CreateFromObject(colorDTO).IncludeOutputId();
             ExecuteSP("USP_Color_Create", param);
-            return param.GetReturnedId();
+            return param.GetOutputId();
         }
 
         public void EditColor(int id, ColorDTO colorDTO)

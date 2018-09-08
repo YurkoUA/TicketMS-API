@@ -19,10 +19,13 @@ namespace TicketMS.API.Data.Repositories
         {
         }
 
-        public IEnumerable<PackageEM> GetList(bool onlyOpened, bool onlySpecial, IPaging paging)
+        public IEnumerable<PackageEM> GetList(bool onlyOpened, bool onlySpecial, IPaging paging, out int totalCount)
         {
-            var param = ParametersHelper.CreateFromObject(paging, new { onlyOpened, onlySpecial });
-            return ExecuteSP<PackageEM, SerialEM, ColorEM, NominalEM, PackageEM>("USP_Package_GetList", PackageEM.MapPackage, SPLIT_ON, param);
+            var param = ParametersHelper.CreateFromObject(paging, new { onlyOpened, onlySpecial }).IncludeOutputTotal();
+
+            var packages = ExecuteSP<PackageEM, SerialEM, ColorEM, NominalEM, PackageEM>("USP_Package_GetList", PackageEM.MapPackage, SPLIT_ON, param);
+            totalCount = param.GetOutputTotal();
+            return packages;
         }
 
         public IEnumerable<PackageEM> GetBySerial(int serialId)
@@ -74,16 +77,16 @@ namespace TicketMS.API.Data.Repositories
 
         public int CreateDefaultPackage(PackageDefaultDTO packageDTO)
         {
-            var param = ParametersHelper.CreateFromObject(packageDTO).IncludeReturnedId();
+            var param = ParametersHelper.CreateFromObject(packageDTO).IncludeOutputId();
             ExecuteSP("USP_Package_CreateDefault", param);
-            return param.GetReturnedId();
+            return param.GetOutputId();
         }
 
         public int CreateSpecialPackage(PackageSpecialDTO packageDTO)
         {
-            var param = ParametersHelper.CreateFromObject(packageDTO).IncludeReturnedId();
+            var param = ParametersHelper.CreateFromObject(packageDTO).IncludeOutputId();
             ExecuteSP("USP_Package_CreateSpecial", param);
-            return param.GetReturnedId();
+            return param.GetOutputId();
         }
 
         public void EditDefaultPackage(int id, PackageDefaultDTO packageDTO)

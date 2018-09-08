@@ -31,9 +31,9 @@ namespace TicketMS.API.Data.Repositories
 
         public int CreateNominal(double value)
         {
-            var param = ParametersHelper.CreateFromObject(new { value }).IncludeReturnedId();
+            var param = ParametersHelper.CreateFromObject(new { value }).IncludeOutputId();
             ExecuteSP("USP_Nominal_Create", param);
-            return param.GetReturnedId();
+            return param.GetOutputId();
         }
 
         public void EditNominal(int id, double value)

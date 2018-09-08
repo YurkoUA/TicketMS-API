@@ -20,11 +20,14 @@ namespace TicketMS.API.Data.Repositories
         {
         }
 
-        public IEnumerable<TicketEM> GetTickets(IPaging paging)
+        public IEnumerable<TicketEM> GetTickets(IPaging paging, out int totalCount)
         {
-            var param = ParametersHelper.CreateFromObject(paging);
-            return ExecuteSP<TicketEM, PackageEM, SerialEM, ColorEM, NominalEM, TicketEM>("USP_Ticket_GetList", 
+            var param = ParametersHelper.CreateFromObject(paging).IncludeOutputTotal();
+            var tickets = ExecuteSP<TicketEM, PackageEM, SerialEM, ColorEM, NominalEM, TicketEM>("USP_Ticket_GetList", 
                 TicketEM.MapTicket, SPLIT_ON, param);
+
+            totalCount = param.GetOutputTotal();
+            return tickets;
         }
 
         public IEnumerable<TicketEM> GetTickets(IDateRange dateRange)
@@ -34,11 +37,14 @@ namespace TicketMS.API.Data.Repositories
                 TicketEM.MapTicket, SPLIT_ON, param);
         }
 
-        public IEnumerable<TicketEM> GetHappyTickets(IPaging paging)
+        public IEnumerable<TicketEM> GetHappyTickets(IPaging paging, out int totalCount)
         {
-            var param = ParametersHelper.CreateFromObject(paging);
-            return ExecuteSP<TicketEM, PackageEM, SerialEM, ColorEM, NominalEM, TicketEM>("USP_Ticket_GetListHappy", 
+            var param = ParametersHelper.CreateFromObject(paging).IncludeOutputTotal();
+            var tickets = ExecuteSP<TicketEM, PackageEM, SerialEM, ColorEM, NominalEM, TicketEM>("USP_Ticket_GetListHappy", 
                 TicketEM.MapTicket, SPLIT_ON, param);
+
+            totalCount = param.GetOutputTotal();
+            return tickets;
         }
 
         public IEnumerable<TicketEM> GetUnallocatedTickets()
@@ -86,23 +92,19 @@ namespace TicketMS.API.Data.Repositories
                 TicketEM.MapTicket, SPLIT_ON, param);
         }
 
-        public IEnumerable<TicketEM> Filter(TicketFilterDTO filterDTO, IPaging paging)
+        public IEnumerable<TicketEM> Filter(TicketFilterDTO filterDTO, IPaging paging, out int totalCount)
         {
-            var param = ParametersHelper.CreateFromObject(filterDTO, paging);
-            return ExecuteSP<TicketEM, PackageEM, SerialEM, ColorEM, NominalEM, TicketEM>("USP_Ticket_Filter", 
+            var param = ParametersHelper.CreateFromObject(filterDTO, paging).IncludeOutputTotal();
+            var tickets = ExecuteSP<TicketEM, PackageEM, SerialEM, ColorEM, NominalEM, TicketEM>("USP_Ticket_Filter", 
                 TicketEM.MapTicket, SPLIT_ON, param);
+
+            totalCount = param.GetOutputTotal();
+            return tickets;
         }
 
         public TicketsTotalDTO CountTickets()
         {
             return ExecuteQuerySingle<TicketsTotalDTO>("SELECT * FROM [v_TicketsTotal]");
-        }
-
-        public int CountTickets(TicketFilterDTO filterDTO)
-        {
-            var param = ParametersHelper.CreateFromObject(filterDTO);
-            var sql = "SELECT [dbo].[fn_Ticket_FilterCount](@firstDigit, @serialId, @colorId, @nominalId, @onlyUnallocated)";
-            return ExecuteAggregateQuery<int>(sql, param);
         }
 
         public TicketEM GetTicket(int id)
@@ -120,9 +122,9 @@ namespace TicketMS.API.Data.Repositories
 
         public int CreateTicket(TicketCreateDTO ticketDTO)
         {
-            var param = ParametersHelper.CreateFromObject(ticketDTO).IncludeReturnedId();
+            var param = ParametersHelper.CreateFromObject(ticketDTO).IncludeOutputId();
             ExecuteSP("USP_Ticket_Create", param);
-            return param.GetReturnedId();
+            return param.GetOutputId();
         }
 
         public void EditTicket(int id, TicketDTO ticketDTO)

@@ -33,9 +33,9 @@ namespace TicketMS.API.Data.Repositories
 
         public int CreateReport(DateTime date, bool isAutomatic, IEnumerable<ReportDocumentDTO> documents)
         {
-            var param = ParametersHelper.CreateFromObject(new { date, isAutomatic, documents }).IncludeReturnedId();
+            var param = ParametersHelper.CreateFromObject(new { date, isAutomatic, documents }).IncludeOutputId();
             ExecuteSP("USP_Report_Create", param);
-            return param.GetReturnedId();
+            return param.GetOutputId();
         }
 
         public DateTime GetLastReportDate()
