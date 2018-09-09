@@ -76,6 +76,10 @@ namespace TicketMS.API.Bootstrap
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IUserAuthenticationService, UserAuthenticationService>();
+
+            services.AddScoped<ISerialService, SerialService>();
+            services.AddScoped<IColorService, ColorService>();
+            services.AddScoped<INominalService, NominalService>();
         }
 
         public static void ConfigureJwtAuthentication(this IServiceCollection services)

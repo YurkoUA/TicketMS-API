@@ -34,10 +34,10 @@ namespace TicketMS.API.Business.Services
             return colorRepository.CreateColor(colorDTO);
         }
 
-        public void EditColor(int id, ColorVM color)
+        public void EditColor(ColorVM color)
         {
             var colorDTO = mapper.ConvertTo<ColorDTO>(color);
-            colorRepository.EditColor(id, colorDTO);
+            colorRepository.EditColor(color.Id, colorDTO);
         }
 
         public void DeleteColor(int id)

@@ -34,10 +34,10 @@ namespace TicketMS.API.Business.Services
             return serialRepository.CreateSerial(serialDTO);
         }
 
-        public void EditSerial(int id, SerialVM serial)
+        public void EditSerial(SerialVM serial)
         {
             var serialDTO = mapper.ConvertTo<SerialDTO>(serial);
-            serialRepository.EditSerial(id, serialDTO);
+            serialRepository.EditSerial(serial.Id, serialDTO);
         }
 
         public void DeleteSerial(int id)

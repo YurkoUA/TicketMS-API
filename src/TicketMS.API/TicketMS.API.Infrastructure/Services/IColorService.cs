@@ -9,7 +9,7 @@ namespace TicketMS.API.Infrastructure.Services
         ColorVM GetColor(int id);
 
         int CreateColor(ColorVM color);
-        void EditColor(int id, ColorVM color);
+        void EditColor(ColorVM color);
         void DeleteColor(int id);
     }
 }

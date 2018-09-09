@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using TicketMS.API.Infrastructure.Interfaces;
 using TicketMS.API.Infrastructure.Models;
+using TicketMS.API.ViewModels.Primitives;
 
 namespace TicketMS.API.Controllers
 {
@@ -29,6 +30,12 @@ namespace TicketMS.API.Controllers
             return BadRequest(errors);
         }
 
+        [NonAction]
+        public IActionResult Identifier(int id)
+        {
+            return Ok(new Identifier(id));
+        }
+
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             ConfigureUserId();
@@ -38,7 +45,7 @@ namespace TicketMS.API.Controllers
 
         private void ConfigureUserId()
         {
-            if (User == null)
+            if (!User.Identity.IsAuthenticated)
                 return;
 
             string strId = User.FindFirstValue(ClaimTypes.NameIdentifier);

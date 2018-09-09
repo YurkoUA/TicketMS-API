@@ -12,6 +12,9 @@ namespace TicketMS.API.ViewModels
         public decimal Value { get; set; }
 
         [BindNever]
+        public bool IsDefault { get; set; }
+
+        [BindNever]
         public int PackagesCount { get; set; }
         [BindNever]
         public int TicketsCount { get; set; }

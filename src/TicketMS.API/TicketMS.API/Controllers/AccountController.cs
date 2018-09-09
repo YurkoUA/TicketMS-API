@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TicketMS.API.Filters;
 using TicketMS.API.Infrastructure.Common.Models.Security;
 using TicketMS.API.Infrastructure.Interfaces;
 using TicketMS.API.Infrastructure.Services;
@@ -36,6 +37,7 @@ namespace TicketMS.API.Controllers
         }
 
         [HttpPost("SignIn")]
+        [ValidateModel]
         public IActionResult SignIn([FromBody]SignInRequestVM model)
         {
             JsonWebToken token = authenticationService.Authenticate(model.Login, model.Password, out UserVM user);
