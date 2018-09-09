@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc.Filters;
-using TicketMS.API.Infrastructure.Annotations;
+using TicketMS.API.Infrastructure.Common.Annotations;
 
 namespace TicketMS.API.Filters
 {

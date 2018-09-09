@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
+using TicketMS.API.Infrastructure.Common.Models.Security;
 using TicketMS.API.Infrastructure.Configuration;
-using TicketMS.API.Infrastructure.Models.Security;
 
 namespace TicketMS.API.Infrastructure.Services
 {

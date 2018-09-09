@@ -41,12 +41,7 @@ namespace TicketMS.API
             services.ConfigureRepositories();
             services.ConfigureUtilServices();
             services.ConfigureServices();
-
-            services.PostConfigure<JwtOptions>(opt =>
-            {
-                services.ConfigureJwtAuthentication(opt);
-            });
-
+            services.ConfigureJwtAuthentication();
             services.ConfigureCors();
 
             services.AddMvc()
@@ -69,7 +64,10 @@ namespace TicketMS.API
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseMvcWithDefaultRoute();
+            app.UseStaticFiles();
 
+            app.UseCors("AllowAllOrigin");
             app.UseMvc();
         }
     }

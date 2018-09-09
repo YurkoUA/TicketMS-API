@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TicketMS.API.Infrastructure.Common.Models.Security;
 using TicketMS.API.Infrastructure.Interfaces;
-using TicketMS.API.Infrastructure.Models.Security;
 using TicketMS.API.Infrastructure.Services;
 using TicketMS.API.ViewModels.Account;
 using TicketMS.API.ViewModels.User;
@@ -23,10 +24,11 @@ namespace TicketMS.API.Controllers
             IUserService userService) : base(mappingService)
         {
             authenticationService = userAuthenticationService;
+            this.userService = userService;
         }
 
         [HttpGet]
-        [Authorize(AuthenticationSchemes = "Bearer")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult Account()
         {
             var user = mapper.ConvertTo<UserVM>(userService.FindUser(UserToken.UserId));

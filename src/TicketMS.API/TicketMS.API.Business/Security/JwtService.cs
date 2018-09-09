@@ -1,16 +1,22 @@
 ﻿using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
 using Microsoft.IdentityModel.Tokens;
+using TicketMS.API.Infrastructure.Common.Models.Security;
 using TicketMS.API.Infrastructure.Configuration;
-using TicketMS.API.Infrastructure.Models.Security;
 using TicketMS.API.Infrastructure.Services;
 
 namespace TicketMS.API.Business.Security
 {
     public class JwtService : IJwtService
     {
+        private readonly ICryptoService cryptoService;
+
+        public JwtService(ICryptoService cryptoService)
+        {
+            this.cryptoService = cryptoService;
+        }
+
         public JsonWebToken CreateJwt(ClaimsIdentity claims, JwtOptions jwtOptions)
         {
             var utcNow = DateTime.UtcNow;
@@ -22,7 +28,7 @@ namespace TicketMS.API.Business.Security
                 notBefore: utcNow,
                 claims: claims.Claims,
                 expires: expiresDate,
-                signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtOptions.Key)), SecurityAlgorithms.RsaSha512Signature)
+                signingCredentials: new SigningCredentials(cryptoService.CreateSecurityKey(jwtOptions.Key), SecurityAlgorithms.HmacSha256)
             );
 
             return new JsonWebToken

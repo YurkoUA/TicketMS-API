@@ -2,9 +2,9 @@
 using System.Linq;
 using Microsoft.Extensions.Options;
 using TicketMS.API.Data.Entity;
+using TicketMS.API.Infrastructure.Common.Models.Security;
 using TicketMS.API.Infrastructure.Configuration;
 using TicketMS.API.Infrastructure.Interfaces;
-using TicketMS.API.Infrastructure.Models.Security;
 using TicketMS.API.Infrastructure.Repositories;
 using TicketMS.API.Infrastructure.Services;
 using TicketMS.API.ViewModels.User;

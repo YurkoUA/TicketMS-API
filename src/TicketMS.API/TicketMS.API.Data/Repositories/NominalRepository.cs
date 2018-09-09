@@ -29,14 +29,14 @@ namespace TicketMS.API.Data.Repositories
             return ExecuteQuerySingle<NominalEM>("SELECT * FROM [v_Nominals] WHERE [Id] = @id", param);
         }
 
-        public int CreateNominal(double value)
+        public int CreateNominal(decimal value)
         {
             var param = ParametersHelper.CreateFromObject(new { value }).IncludeOutputId();
             ExecuteSP("USP_Nominal_Create", param);
             return param.GetOutputId();
         }
 
-        public void EditNominal(int id, double value)
+        public void EditNominal(int id, decimal value)
         {
             var param = ParametersHelper.CreateFromObject(new { value }).IncludeId(id);
             ExecuteSP("USP_Nominal_Update", param);

@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
 using TicketMS.API.Infrastructure.Services;
 
 namespace TicketMS.API.Business.Security
@@ -41,6 +43,11 @@ namespace TicketMS.API.Business.Security
             var result = new byte[size];
             xorResult.CopyTo(result, 0);
             return result;
+        }
+
+        public SymmetricSecurityKey CreateSecurityKey(string key)
+        {
+            return new SymmetricSecurityKey(Encoding.ASCII.GetBytes(key));
         }
     }
 }

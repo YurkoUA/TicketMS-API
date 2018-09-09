@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using TicketMS.API.Infrastructure.Interfaces;
 using TicketMS.API.Infrastructure.Models;
 
@@ -12,15 +13,14 @@ namespace TicketMS.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ApplicationController : ControllerBase
+    public class ApplicationController : Controller
     {
-        public UserToken UserToken { get;  }
+        public UserToken UserToken { get; } = new UserToken();
         protected readonly IMappingService mapper;
 
         public ApplicationController(IMappingService mappingService)
         {
             mapper = mappingService;
-            ConfigureUserId();
         }
 
         [NonAction]
@@ -29,10 +29,18 @@ namespace TicketMS.API.Controllers
             return BadRequest(errors);
         }
 
+        public override void OnActionExecuting(ActionExecutingContext context)
+        {
+            ConfigureUserId();
+        }
+
         #region Private methods.
 
         private void ConfigureUserId()
         {
+            if (User == null)
+                return;
+
             string strId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             var success = int.TryParse(strId, out int id);

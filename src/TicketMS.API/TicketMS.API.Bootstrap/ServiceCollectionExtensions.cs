@@ -15,6 +15,7 @@ using TicketMS.API.Infrastructure.Services;
 using TicketMS.API.Business.Security;
 using TicketMS.API.Business.Services;
 using TicketMS.API.Infrastructure.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace TicketMS.API.Bootstrap
 {
@@ -77,8 +78,11 @@ namespace TicketMS.API.Bootstrap
             services.AddScoped<IUserAuthenticationService, UserAuthenticationService>();
         }
 
-        public static void ConfigureJwtAuthentication(this IServiceCollection services, JwtOptions jwtOptions)
+        public static void ConfigureJwtAuthentication(this IServiceCollection services)
         {
+            var jwtOptions = services.BuildServiceProvider().GetService<IOptions<JwtOptions>>().Value;
+            var cryptoService = services.BuildServiceProvider().GetService<ICryptoService>();
+
             var validationParams = new TokenValidationParameters
             {
                 ValidateIssuer = true,
@@ -88,7 +92,7 @@ namespace TicketMS.API.Bootstrap
                 ValidAudience = jwtOptions.Audience,
 
                 ValidateIssuerSigningKey = true,
-                IssuerSigningKey = jwtOptions.SignInKey,
+                IssuerSigningKey = cryptoService.CreateSecurityKey(jwtOptions.Key),
 
                 ValidateLifetime = true
             };
