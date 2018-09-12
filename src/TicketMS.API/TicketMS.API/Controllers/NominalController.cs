@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TicketMS.API.Filters;
 using TicketMS.API.Infrastructure.Interfaces;
@@ -13,41 +12,40 @@ using TicketMS.API.ViewModels;
 
 namespace TicketMS.API.Controllers
 {
-    public class SerialController : ApplicationController
+    public class NominalController : ApplicationController
     {
-        private readonly ISerialService serialService;
+        private readonly INominalService nominalService;
 
-        public SerialController(IMappingService mappingService, ISerialService serialService) : base(mappingService)
+        public NominalController(IMappingService mappingService, INominalService nominalService) : base(mappingService)
         {
-            this.serialService = serialService;
+            this.nominalService = nominalService;
         }
 
         [HttpGet]
         public IActionResult GetAll()
         {
-            return Ok(serialService.GetAllSeries());
+            return Ok(nominalService.GetAllNominals());
         }
 
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            return Ok(serialService.GetSerial(id));
+            return Ok(nominalService.GetNominal(id));
         }
 
         [HttpPost, ValidateModel]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public IActionResult Create([FromBody]SerialVM serial)
+        public IActionResult Create([FromBody]NominalVM nominal)
         {
-            var id = serialService.CreateSerial(serial);
+            var id = nominalService.CreateNominal(nominal.Value);
             return Identifier(id);
         }
 
         [HttpPut("{id}"), ValidateModel]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public IActionResult Edit(int id, [FromBody]SerialVM serial)
+        public IActionResult Edit(int id, [FromBody]NominalVM nominal)
         {
-            serial.Id = id;
-            serialService.EditSerial(serial);
+            nominalService.EditNominal(id, nominal.Value);
             return Ok();
         }
 
@@ -55,15 +53,7 @@ namespace TicketMS.API.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult Delete(int id)
         {
-            serialService.DeleteSerial(id);
-            return Ok();
-        }
-
-        [HttpPut("SetDefault/{id?}")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public IActionResult SetDefault(int id)
-        {
-            serialService.SetAsDefault(id);
+            nominalService.DeleteNominal(id);
             return Ok();
         }
     }

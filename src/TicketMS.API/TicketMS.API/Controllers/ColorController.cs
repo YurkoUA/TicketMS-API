@@ -13,41 +13,41 @@ using TicketMS.API.ViewModels;
 
 namespace TicketMS.API.Controllers
 {
-    public class SerialController : ApplicationController
+    public class ColorController : ApplicationController
     {
-        private readonly ISerialService serialService;
+        private readonly IColorService colorService;
 
-        public SerialController(IMappingService mappingService, ISerialService serialService) : base(mappingService)
+        public ColorController(IMappingService mappingService, IColorService colorService) : base(mappingService)
         {
-            this.serialService = serialService;
+            this.colorService = colorService;
         }
 
         [HttpGet]
         public IActionResult GetAll()
         {
-            return Ok(serialService.GetAllSeries());
+            return Ok(colorService.GetAllColors());
         }
 
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            return Ok(serialService.GetSerial(id));
+            return Ok(colorService.GetColor(id));
         }
 
         [HttpPost, ValidateModel]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public IActionResult Create([FromBody]SerialVM serial)
+        public IActionResult Create([FromBody]ColorVM color)
         {
-            var id = serialService.CreateSerial(serial);
+            var id = colorService.CreateColor(color);
             return Identifier(id);
         }
 
         [HttpPut("{id}"), ValidateModel]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public IActionResult Edit(int id, [FromBody]SerialVM serial)
+        public IActionResult Edit(int id, [FromBody]ColorVM color)
         {
-            serial.Id = id;
-            serialService.EditSerial(serial);
+            color.Id = id;
+            colorService.EditColor(color);
             return Ok();
         }
 
@@ -55,15 +55,7 @@ namespace TicketMS.API.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult Delete(int id)
         {
-            serialService.DeleteSerial(id);
-            return Ok();
-        }
-
-        [HttpPut("SetDefault/{id?}")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public IActionResult SetDefault(int id)
-        {
-            serialService.SetAsDefault(id);
+            colorService.DeleteColor(id);
             return Ok();
         }
     }

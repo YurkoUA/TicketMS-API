@@ -27,7 +27,7 @@ namespace TicketMS.API.Data.Repositories
         public ColorEM GetColor(int id)
         {
             var param = ParametersHelper.CreateIdParameter(id);
-            return ExecuteQuerySingle<ColorEM>("SELECT * FROM [v_Color] WHERE [Id] = @id", param);
+            return ExecuteQuerySingle<ColorEM>("SELECT * FROM [v_Colors] WHERE [Id] = @id", param);
         }
 
         public int CreateColor(ColorDTO colorDTO)
