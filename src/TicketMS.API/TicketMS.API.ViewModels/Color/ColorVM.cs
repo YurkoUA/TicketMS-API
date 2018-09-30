@@ -2,16 +2,10 @@
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using TicketMS.API.Infrastructure.Common.Attributes.Validation;
 
-namespace TicketMS.API.ViewModels
+namespace TicketMS.API.ViewModels.Color
 {
-    public class ColorVM
+    public class ColorVM : ColorSimpleVM
     {
-        [BindNever]
-        public int Id { get; set; }
-
-        [Required]
-        public string Name { get; set; }
-
         [Required, PaletteColor]
         public string PaletteName { get; set; }
 

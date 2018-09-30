@@ -2,7 +2,7 @@
 using TicketMS.API.Infrastructure.Interfaces;
 using TicketMS.API.Infrastructure.Repositories;
 using TicketMS.API.Infrastructure.Services;
-using TicketMS.API.ViewModels;
+using TicketMS.API.ViewModels.Nominal;
 
 namespace TicketMS.API.Business.Services
 {

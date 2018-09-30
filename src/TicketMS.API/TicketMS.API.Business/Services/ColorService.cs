@@ -3,7 +3,7 @@ using TicketMS.API.Infrastructure.DTO.Color;
 using TicketMS.API.Infrastructure.Interfaces;
 using TicketMS.API.Infrastructure.Repositories;
 using TicketMS.API.Infrastructure.Services;
-using TicketMS.API.ViewModels;
+using TicketMS.API.ViewModels.Color;
 
 namespace TicketMS.API.Business.Services
 {

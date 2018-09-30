@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using TicketMS.API.Filters;
 using TicketMS.API.Infrastructure.Interfaces;
 using TicketMS.API.Infrastructure.Services;
-using TicketMS.API.ViewModels;
+using TicketMS.API.ViewModels.Serial;
 
 namespace TicketMS.API.Controllers
 {

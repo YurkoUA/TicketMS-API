@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using TicketMS.API.ViewModels;
+using TicketMS.API.ViewModels.Nominal;
 
 namespace TicketMS.API.Infrastructure.Services
 {
