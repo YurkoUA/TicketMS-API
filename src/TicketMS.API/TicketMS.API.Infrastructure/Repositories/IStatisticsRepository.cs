@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TicketMS.API.Infrastructure.Common.Interfaces;
 using TicketMS.API.Infrastructure.DTO.Statistics;
 
 namespace TicketMS.API.Infrastructure.Repositories

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using TicketMS.API.Infrastructure;
+using TicketMS.API.Infrastructure.Common.Interfaces;
 using TicketMS.API.Infrastructure.DTO.Package;
 using TicketMS.API.Infrastructure.Interfaces;
 using TicketMS.API.Infrastructure.Repositories;

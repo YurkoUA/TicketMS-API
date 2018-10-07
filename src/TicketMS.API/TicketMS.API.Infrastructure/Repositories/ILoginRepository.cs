@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using TicketMS.API.Data.Entity;
+using TicketMS.API.Infrastructure.Common.Interfaces;
 
 namespace TicketMS.API.Infrastructure.Repositories
 {

@@ -2,6 +2,7 @@
 using System.Linq;
 using TicketMS.API.Data.Entity;
 using TicketMS.API.Infrastructure;
+using TicketMS.API.Infrastructure.Common.Interfaces;
 using TicketMS.API.Infrastructure.Database;
 using TicketMS.API.Infrastructure.DTO.Package;
 using TicketMS.API.Infrastructure.Extensions;

@@ -1,4 +1,4 @@
-﻿namespace TicketMS.API.Infrastructure
+﻿namespace TicketMS.API.Infrastructure.Common.Interfaces
 {
     public interface IPaging
     {
