@@ -21,15 +21,15 @@ namespace TicketMS.API.Infrastructure.Services
 
         PackageVM GetPackage(int id);
 
-        int CreateDefaultPackage(PackageDefaultDTO packageDTO);
-        int CreateSpecialPackage(PackageSpecialDTO packageDTO);
+        int CreateDefaultPackage(PackageCreateVM package);
+        int CreateSpecialPackage(PackageSpecialCreateVM package);
 
-        void EditDefaultPackage(int id, PackageDefaultDTO packageDTO);
-        void EditSpecialPackage(int id, PackageSpecialDTO packageDTO);
+        void EditDefaultPackage(int id, PackageCreateVM package);
+        void EditSpecialPackage(int id, PackageSpecialCreateVM package);
 
         void SetPackageOpened(int id, bool isOpened);
-        void MakePackageDefault(int id, PackageDefaultDTO packageDTO);
-        void MakePackageSpecial(int id, PackageMakeSpecialDTO packageDTO);
+        void MakePackageDefault(int id, PackageCreateVM package);
+        void MakePackageSpecial(int id, PackageMakeSpecialVM package);
 
         void DeletePackage(int id);
 

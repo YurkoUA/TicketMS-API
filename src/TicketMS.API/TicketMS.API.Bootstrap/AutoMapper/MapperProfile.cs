@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using TicketMS.API.Data.Entity;
 using TicketMS.API.Infrastructure.DTO.Color;
+using TicketMS.API.Infrastructure.DTO.Package;
 using TicketMS.API.Infrastructure.DTO.Serial;
+using TicketMS.API.Infrastructure.DTO.Ticket;
 using TicketMS.API.ViewModels.Color;
 using TicketMS.API.ViewModels.Nominal;
 using TicketMS.API.ViewModels.Package;
@@ -58,11 +60,18 @@ namespace TicketMS.API.Bootstrap.AutoMapper
         {
             CreateMap<PackageEM, PackageVM>();
             CreateMap<PackageEM, PackageSimpleVM>();
+
+            CreateMap<PackageCreateVM, PackageDefaultDTO>();
+            CreateMap<PackageSpecialCreateVM, PackageSpecialDTO>();
+            CreateMap<PackageMakeSpecialVM, PackageMakeSpecialDTO>();
         }
 
         private void ConfigureTicketMapping()
         {
             CreateMap<TicketEM, TicketVM>();
+
+            CreateMap<TicketCreateVM, TicketCreateDTO>();
+            CreateMap<TicketEditVM, TicketDTO>();
         }
     }
 }

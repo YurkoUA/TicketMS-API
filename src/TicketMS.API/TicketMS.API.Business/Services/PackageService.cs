@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using TicketMS.API.Infrastructure;
 using TicketMS.API.Infrastructure.DTO.Package;
 using TicketMS.API.Infrastructure.Interfaces;
@@ -72,24 +70,28 @@ namespace TicketMS.API.Business.Services
             return mapper.ConvertTo<PackageVM>(packageEM);
         }
 
-        public int CreateDefaultPackage(PackageDefaultDTO packageDTO)
+        public int CreateDefaultPackage(PackageCreateVM package)
         {
-            throw new NotImplementedException();
+            var dto = mapper.ConvertTo<PackageDefaultDTO>(package);
+            return packageRepository.CreateDefaultPackage(dto);
         }
 
-        public int CreateSpecialPackage(PackageSpecialDTO packageDTO)
+        public int CreateSpecialPackage(PackageSpecialCreateVM package)
         {
-            throw new NotImplementedException();
+            var dto = mapper.ConvertTo<PackageSpecialDTO>(package);
+            return packageRepository.CreateSpecialPackage(dto);
         }
 
-        public void EditDefaultPackage(int id, PackageDefaultDTO packageDTO)
+        public void EditDefaultPackage(int id, PackageCreateVM package)
         {
-            throw new NotImplementedException();
+            var dto = mapper.ConvertTo<PackageDefaultDTO>(package);
+            packageRepository.EditDefaultPackage(id, dto);
         }
 
-        public void EditSpecialPackage(int id, PackageSpecialDTO packageDTO)
+        public void EditSpecialPackage(int id, PackageSpecialCreateVM package)
         {
-            throw new NotImplementedException();
+            var dto = mapper.ConvertTo<PackageSpecialDTO>(package);
+            packageRepository.EditSpecialPackage(id, dto);
         }
 
         public void SetPackageOpened(int id, bool isOpened)
@@ -97,14 +99,16 @@ namespace TicketMS.API.Business.Services
             packageRepository.SetPackageOpened(id, isOpened);
         }
 
-        public void MakePackageDefault(int id, PackageDefaultDTO packageDTO)
+        public void MakePackageDefault(int id, PackageCreateVM package)
         {
-            throw new NotImplementedException();
+            var dto = mapper.ConvertTo<PackageDefaultDTO>(package);
+            packageRepository.MakePackageDefault(id, dto);
         }
 
-        public void MakePackageSpecial(int id, PackageMakeSpecialDTO packageDTO)
+        public void MakePackageSpecial(int id, PackageMakeSpecialVM package)
         {
-            throw new NotImplementedException();
+            var dto = mapper.ConvertTo<PackageMakeSpecialDTO>(package);
+            packageRepository.MakePackageSpecial(id, dto);
         }
 
         public void DeletePackage(int id)

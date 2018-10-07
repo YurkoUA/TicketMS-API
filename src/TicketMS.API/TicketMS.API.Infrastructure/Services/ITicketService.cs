@@ -25,8 +25,8 @@ namespace TicketMS.API.Infrastructure.Services
         TicketVM GetTicket(int id);
         TicketVM GetRandomTicket();
 
-        int CreateTicket(TicketCreateDTO ticketDTO);
-        void EditTicket(int id, TicketDTO ticketDTO);
+        int CreateTicket(TicketCreateVM ticket);
+        void EditTicket(int id, TicketEditVM ticket);
         void DeleteTicket(int id);
 
         void ChangeNumber(int id, string number);
