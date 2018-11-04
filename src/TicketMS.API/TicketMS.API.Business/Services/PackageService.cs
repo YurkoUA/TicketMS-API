@@ -18,9 +18,9 @@ namespace TicketMS.API.Business.Services
             this.packageRepository = packageRepository;
         }
 
-        public IEnumerable<PackageVM> GetList(bool onlyOpened, bool onlySpecial, IPaging paging, out int totalCount)
+        public IEnumerable<PackageVM> GetList(PackageGetListVM getListVM, out int totalCount)
         {
-            var packagesEM = packageRepository.GetList(onlyOpened, onlySpecial, paging, out totalCount);
+            var packagesEM = packageRepository.GetList(getListVM.OnlyOpened, getListVM.OnlySpecial, getListVM, out totalCount);
             return mapper.ConvertCollectionTo<PackageVM>(packagesEM);
         }
 
@@ -42,14 +42,16 @@ namespace TicketMS.API.Business.Services
             return mapper.ConvertCollectionTo<PackageVM>(packagesEM);
         }
 
-        public IEnumerable<PackageVM> GetAvailableForTicket(PackageFilterDTO filterDTO)
+        public IEnumerable<PackageVM> GetAvailableForTicket(PackageFilterVM filterVM)
         {
+            var filterDTO = mapper.ConvertTo<PackageFilterDTO>(filterVM);
             var packagesEM = packageRepository.GetAvailableForTicket(filterDTO);
             return mapper.ConvertCollectionTo<PackageVM>(packagesEM);
         }
 
-        public IEnumerable<PackageVM> Filter(PackageFilterDTO filterDTO)
+        public IEnumerable<PackageVM> Filter(PackageFilterVM filterVM)
         {
+            var filterDTO = mapper.ConvertTo<PackageFilterDTO>(filterVM);
             var packagesEM = packageRepository.Filter(filterDTO);
             return mapper.ConvertCollectionTo<PackageVM>(packagesEM);
         }

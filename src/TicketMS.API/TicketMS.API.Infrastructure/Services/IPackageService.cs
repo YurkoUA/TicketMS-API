@@ -7,14 +7,14 @@ namespace TicketMS.API.Infrastructure.Services
 {
     public interface IPackageService
     {
-        IEnumerable<PackageVM> GetList(bool onlyOpened, bool onlySpecial, IPaging paging, out int totalCount);
+        IEnumerable<PackageVM> GetList(PackageGetListVM getListVM, out int totalCount);
 
         IEnumerable<PackageVM> GetBySerial(int serialId);
         IEnumerable<PackageVM> GetByColor(int colorId);
         IEnumerable<PackageVM> GetByNominal(int nominalId);
-        IEnumerable<PackageVM> GetAvailableForTicket(PackageFilterDTO filterDTO);
+        IEnumerable<PackageVM> GetAvailableForTicket(PackageFilterVM filterVM);
 
-        IEnumerable<PackageVM> Filter(PackageFilterDTO filterDTO);
+        IEnumerable<PackageVM> Filter(PackageFilterVM filterVM);
 
         PackagesTotalDTO CountPackages();
 

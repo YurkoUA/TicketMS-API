@@ -64,6 +64,8 @@ namespace TicketMS.API.Bootstrap.AutoMapper
             CreateMap<PackageCreateVM, PackageDefaultDTO>();
             CreateMap<PackageSpecialCreateVM, PackageSpecialDTO>();
             CreateMap<PackageMakeSpecialVM, PackageMakeSpecialDTO>();
+
+            CreateMap<PackageFilterVM, PackageFilterDTO>();
         }
 
         private void ConfigureTicketMapping()
