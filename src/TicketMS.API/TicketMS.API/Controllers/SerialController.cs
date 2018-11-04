@@ -22,13 +22,13 @@ namespace TicketMS.API.Controllers
             this.serialService = serialService;
         }
 
-        [HttpGet]
+        [HttpGet("List")]
         public IActionResult GetAll()
         {
             return Ok(serialService.GetAllSeries());
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("Get/{id?}")]
         public IActionResult GetById(int id)
         {
             return Ok(serialService.GetSerial(id));
@@ -42,7 +42,7 @@ namespace TicketMS.API.Controllers
             return Identifier(id);
         }
 
-        [HttpPut("{id}"), ValidateModel]
+        [HttpPut("{id?}"), ValidateModel]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult Edit(int id, [FromBody]SerialVM serial)
         {
@@ -51,7 +51,7 @@ namespace TicketMS.API.Controllers
             return Ok();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id?}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult Delete(int id)
         {

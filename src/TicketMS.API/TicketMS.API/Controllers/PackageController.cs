@@ -23,55 +23,55 @@ namespace TicketMS.API.Controllers
             this.packageService = packageService;
         }
 
-        [HttpGet]
+        [HttpGet("List")]
         public IActionResult GetAll(PackageGetListVM getListVM)
         {
             return Ok(packageService.GetList(getListVM, out _));
         }
 
-        [HttpGet]
+        [HttpGet("BySerial/{serialId?}")]
         public IActionResult GetBySerial(int serialId)
         {
             return Ok(packageService.GetBySerial(serialId));
         }
 
-        [HttpGet]
+        [HttpGet("ByColor/{colorId?}")]
         public IActionResult GetByColor(int colorId)
         {
             return Ok(packageService.GetByColor(colorId));
         }
 
-        [HttpGet]
+        [HttpGet("ByNominal/{nominalId?}")]
         public IActionResult GetByNominal(int nominalId)
         {
             return Ok(packageService.GetByNominal(nominalId));
         }
 
-        [HttpGet]
+        [HttpGet("Filter"), ValidateModel]
         public IActionResult Filter(PackageFilterVM filterVM)
         {
             return Ok(packageService.Filter(filterVM));
         }
 
-        [HttpGet, ValidateModel]
+        [HttpGet("Available"), ValidateModel]
         public IActionResult GetAvailableForTicket(PackageFilterVM filterVM)
         {
             return Ok(packageService.GetAvailableForTicket(filterVM));
         }
 
-        [HttpGet]
+        [HttpGet("Count")]
         public IActionResult Count()
         {
             return Ok(packageService.CountPackages());
         }
 
-        [HttpGet, ValidateModel]
+        [HttpGet("Find"), ValidateModel]
         public IActionResult Find(SearchVM searchVM)
         {
             return Ok(packageService.Find(searchVM.Expression));
         }
 
-        [HttpGet]
+        [HttpGet("Get/{id?}")]
         public IActionResult GetPackage(int id)
         {
             return Ok(packageService.GetPackage(id));
@@ -85,7 +85,7 @@ namespace TicketMS.API.Controllers
             return Identifier(id);
         }
 
-        [HttpPost, ValidateModel]
+        [HttpPost("Special"), ValidateModel]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult CreateSpecial([FromBody]PackageSpecialCreateVM packageCreateVM)
         {
@@ -93,7 +93,7 @@ namespace TicketMS.API.Controllers
             return Identifier(id);
         }
 
-        [HttpPut, ValidateModel]
+        [HttpPut("{id?}"), ValidateModel]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult Edit(int id, [FromBody]PackageCreateVM packageVM)
         {
@@ -101,7 +101,7 @@ namespace TicketMS.API.Controllers
             return Ok();
         }
 
-        [HttpPut, ValidateModel]
+        [HttpPut("Special/{id?}"), ValidateModel]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult EditSpecial(int id, [FromBody]PackageSpecialCreateVM packageVM)
         {
@@ -109,7 +109,7 @@ namespace TicketMS.API.Controllers
             return Ok();
         }
 
-        [HttpPut]
+        [HttpPut("Open/{id?}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult Open(int id)
         {
@@ -117,7 +117,7 @@ namespace TicketMS.API.Controllers
             return Ok();
         }
 
-        [HttpPut]
+        [HttpPut("Close/{id?}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult Close(int id)
         {
@@ -125,7 +125,7 @@ namespace TicketMS.API.Controllers
             return Ok();
         }
 
-        [HttpPut, ValidateModel]
+        [HttpPut("MakeDefault/{id?}"), ValidateModel]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult MakeDefault(int id, [FromBody]PackageCreateVM packageVM)
         {
@@ -133,7 +133,7 @@ namespace TicketMS.API.Controllers
             return Ok();
         }
 
-        [HttpPut, ValidateModel]
+        [HttpPut("MakeSpecial/{id?}"), ValidateModel]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult MakeSpecial(int id, [FromBody]PackageMakeSpecialVM packageVM)
         {
@@ -141,7 +141,7 @@ namespace TicketMS.API.Controllers
             return Ok();
         }
 
-        [HttpDelete, ValidateModel]
+        [HttpDelete("{id?}"), ValidateModel]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult Delete(int id)
         {
