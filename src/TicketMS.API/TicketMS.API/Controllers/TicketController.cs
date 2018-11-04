@@ -22,19 +22,19 @@ namespace TicketMS.API.Controllers
         }
 
         [HttpGet("List")]
-        public IActionResult GetAll(PagingVM pagingVM)
+        public IActionResult GetAll([FromQuery]PagingVM pagingVM)
         {
             return Ok(ticketService.GetTickets(pagingVM, out _));
         }
 
         [HttpGet("Dates")]
-        public IActionResult GetByDates(DateRangeVM dateRangeVM)
+        public IActionResult GetByDates([FromQuery]DateRangeVM dateRangeVM)
         {
             return Ok(ticketService.GetTickets(dateRangeVM));
         }
 
         [HttpGet("Happy")]
-        public IActionResult GetHappy(PagingVM pagingVM)
+        public IActionResult GetHappy([FromQuery]PagingVM pagingVM)
         {
             return Ok(ticketService.GetHappyTickets(pagingVM, out _));
         }
@@ -70,7 +70,7 @@ namespace TicketMS.API.Controllers
         }
 
         [HttpGet("ByNote")]
-        public IActionResult GetByNote(SearchVM searchVM)
+        public IActionResult GetByNote([FromQuery]SearchVM searchVM)
         {
             return Ok(ticketService.GetByNote(searchVM.Expression));
         }
@@ -82,13 +82,13 @@ namespace TicketMS.API.Controllers
         }
 
         [HttpGet("Filter")]
-        public IActionResult Filter(TicketFilterVM filterVM)
+        public IActionResult Filter([FromQuery]TicketFilterVM filterVM)
         {
             return Ok(ticketService.Filter(filterVM, out _));
         }
 
         [HttpGet("Find")]
-        public IActionResult Find(TicketSearchVM searchVM)
+        public IActionResult Find([FromQuery]TicketSearchVM searchVM)
         {
             return Ok(ticketService.Find(searchVM));
         }

@@ -24,7 +24,7 @@ namespace TicketMS.API.Controllers
         }
 
         [HttpGet("List")]
-        public IActionResult GetAll(PackageGetListVM getListVM)
+        public IActionResult GetAll([FromQuery]PackageGetListVM getListVM)
         {
             return Ok(packageService.GetList(getListVM, out _));
         }
@@ -48,13 +48,13 @@ namespace TicketMS.API.Controllers
         }
 
         [HttpGet("Filter"), ValidateModel]
-        public IActionResult Filter(PackageFilterVM filterVM)
+        public IActionResult Filter([FromQuery]PackageFilterVM filterVM)
         {
             return Ok(packageService.Filter(filterVM));
         }
 
         [HttpGet("Available"), ValidateModel]
-        public IActionResult GetAvailableForTicket(PackageFilterVM filterVM)
+        public IActionResult GetAvailableForTicket([FromQuery]PackageFilterVM filterVM)
         {
             return Ok(packageService.GetAvailableForTicket(filterVM));
         }
@@ -66,7 +66,7 @@ namespace TicketMS.API.Controllers
         }
 
         [HttpGet("Find"), ValidateModel]
-        public IActionResult Find(SearchVM searchVM)
+        public IActionResult Find([FromQuery]SearchVM searchVM)
         {
             return Ok(packageService.Find(searchVM.Expression));
         }
