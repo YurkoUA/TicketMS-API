@@ -1,8 +1,8 @@
 ﻿using TicketMS.API.Infrastructure.Common.Interfaces;
 
-namespace TicketMS.API.Infrastructure.DTO.Ticket
+namespace TicketMS.API.ViewModels.Ticket
 {
-    public class TicketFilterDTO : FilterDTO, IPaging
+    public class TicketFilterVM : FilterVM, IPaging
     {
         public bool OnlyUnallocated { get; set; }
         public int Offset { get; set; }

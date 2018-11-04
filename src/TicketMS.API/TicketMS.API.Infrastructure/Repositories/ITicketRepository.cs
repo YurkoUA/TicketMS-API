@@ -20,7 +20,8 @@ namespace TicketMS.API.Infrastructure.Repositories
         IEnumerable<TicketEM> GetByNote(string note);
         IEnumerable<TicketEM> GetDuplicatesWith(int id);
 
-        IEnumerable<TicketEM> Filter(TicketFilterDTO filterDTO, IPaging paging, out int totalCount);
+        IEnumerable<TicketEM> Filter(TicketFilterDTO filterDTO, out int totalCount);
+        IEnumerable<TicketEM> Find(TicketSearchDTO searchDTO);
         TicketsTotalDTO CountTickets();
 
         TicketEM GetTicket(int id);

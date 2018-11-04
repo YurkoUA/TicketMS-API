@@ -74,6 +74,9 @@ namespace TicketMS.API.Bootstrap.AutoMapper
 
             CreateMap<TicketCreateVM, TicketCreateDTO>();
             CreateMap<TicketEditVM, TicketDTO>();
+
+            CreateMap<TicketFilterVM, TicketFilterDTO>();
+            CreateMap<TicketSearchVM, TicketSearchDTO>();
         }
     }
 }

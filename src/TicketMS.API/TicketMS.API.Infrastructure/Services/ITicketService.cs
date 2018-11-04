@@ -20,7 +20,8 @@ namespace TicketMS.API.Infrastructure.Services
         IEnumerable<TicketVM> GetByNote(string note);
         IEnumerable<TicketVM> GetDuplicatesWith(int id);
 
-        IEnumerable<TicketVM> Filter(TicketFilterDTO filterDTO, IPaging paging, out int totalCount);
+        IEnumerable<TicketVM> Filter(TicketFilterVM filterVM, out int totalCount);
+        IEnumerable<TicketVM> Find(TicketSearchVM searchVM);
         TicketsTotalDTO CountTickets();
 
         TicketVM GetTicket(int id);
@@ -31,8 +32,8 @@ namespace TicketMS.API.Infrastructure.Services
         void DeleteTicket(int id);
 
         void ChangeNumber(int id, string number);
-        void MoveTicket(int ticketId, int packageId);
-        void MoveManyTickets(IEnumerable<int> ticketsIds, int packageId);
+        void MoveTicket(TicketMoveVM ticketMoveVM);
+        void MoveManyTickets(TicketMoveManyVM ticketMoveVM);
 
         bool NumberExists(string number);
         bool Exists(string number, int colorId, int serialId, string serialNumber);

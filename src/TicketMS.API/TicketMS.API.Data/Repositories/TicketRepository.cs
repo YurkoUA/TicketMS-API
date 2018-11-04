@@ -93,13 +93,22 @@ namespace TicketMS.API.Data.Repositories
                 TicketEM.MapTicket, SPLIT_ON, param);
         }
 
-        public IEnumerable<TicketEM> Filter(TicketFilterDTO filterDTO, IPaging paging, out int totalCount)
+        public IEnumerable<TicketEM> Filter(TicketFilterDTO filterDTO, out int totalCount)
         {
-            var param = ParametersHelper.CreateFromObject(filterDTO, paging).IncludeOutputTotal();
+            var param = ParametersHelper.CreateFromObject(filterDTO).IncludeOutputTotal();
             var tickets = ExecuteSP<TicketEM, PackageEM, SerialEM, ColorEM, NominalEM, TicketEM>("USP_Ticket_Filter", 
                 TicketEM.MapTicket, SPLIT_ON, param);
 
             totalCount = param.GetOutputTotal();
+            return tickets;
+        }
+
+        public IEnumerable<TicketEM> Find(TicketSearchDTO searchDTO)
+        {
+            var param = ParametersHelper.CreateFromObject(searchDTO);
+            var tickets = ExecuteSP<TicketEM, PackageEM, SerialEM, ColorEM, NominalEM, TicketEM>("USP_Ticket_FindNumber",
+                TicketEM.MapTicket, SPLIT_ON, param);
+
             return tickets;
         }
 

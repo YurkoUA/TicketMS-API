@@ -78,9 +78,17 @@ namespace TicketMS.API.Business.Services
             return mapper.ConvertCollectionTo<TicketVM>(tickets);
         }
 
-        public IEnumerable<TicketVM> Filter(TicketFilterDTO filterDTO, IPaging paging, out int totalCount)
+        public IEnumerable<TicketVM> Filter(TicketFilterVM filterVM, out int totalCount)
         {
-            var tickets = ticketRepository.Filter(filterDTO, paging, out totalCount);
+            var filterDTO = mapper.ConvertTo<TicketFilterDTO>(filterVM);
+            var tickets = ticketRepository.Filter(filterDTO, out totalCount);
+            return mapper.ConvertCollectionTo<TicketVM>(tickets);
+        }
+
+        public IEnumerable<TicketVM> Find(TicketSearchVM searchVM)
+        {
+            var dto = mapper.ConvertTo<TicketSearchDTO>(searchVM);
+            var tickets = ticketRepository.Find(dto);
             return mapper.ConvertCollectionTo<TicketVM>(tickets);
         }
 
@@ -122,14 +130,14 @@ namespace TicketMS.API.Business.Services
             ticketRepository.ChangeNumber(id, number);
         }
 
-        public void MoveTicket(int ticketId, int packageId)
+        public void MoveTicket(TicketMoveVM ticketMoveVM)
         {
-            ticketRepository.MoveTicket(ticketId, packageId);
+            ticketRepository.MoveTicket(ticketMoveVM.TicketId, ticketMoveVM.PackageId);
         }
 
-        public void MoveManyTickets(IEnumerable<int> ticketsIds, int packageId)
+        public void MoveManyTickets(TicketMoveManyVM ticketMoveVM)
         {
-            ticketRepository.MoveManyTickets(ticketsIds, packageId);
+            ticketRepository.MoveManyTickets(ticketMoveVM.TicketsIds, ticketMoveVM.PackageId);
         }
 
         public bool NumberExists(string number)
