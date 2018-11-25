@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -55,6 +56,9 @@ namespace TicketMS.API
                     opt.SerializerSettings.Formatting = Formatting.Indented;
 #endif
                 });
+            services.Configure<MvcOptions>(options => {
+                options.Filters.Add(new CorsAuthorizationFilterFactory("AllowAllOrigin"));
+            });
 
             Bootstrap.Bootstrap.Initialize();
         }
@@ -69,6 +73,7 @@ namespace TicketMS.API
             app.UseMvcWithDefaultRoute();
             app.UseStaticFiles();
 
+            app.UseHttpsRedirection();
             app.UseCors("AllowAllOrigin");
             app.UseMvc();
         }
