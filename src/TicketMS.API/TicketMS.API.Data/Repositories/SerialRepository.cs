@@ -48,11 +48,5 @@ namespace TicketMS.API.Data.Repositories
             var param = ParametersHelper.CreateIdParameter(id);
             ExecuteSP("USP_Serial_Delete", param);
         }
-
-        public void SetAsDefault(int id)
-        {
-            var param = ParametersHelper.CreateIdParameter(id);
-            ExecuteSP("USP_Serial_SetDefault", param);
-        }
     }
 }

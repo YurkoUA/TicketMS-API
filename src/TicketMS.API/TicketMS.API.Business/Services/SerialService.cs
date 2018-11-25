@@ -44,10 +44,5 @@ namespace TicketMS.API.Business.Services
         {
             serialRepository.DeleteSerial(id);
         }
-
-        public void SetAsDefault(int id)
-        {
-            serialRepository.SetAsDefault(id);
-        }
     }
 }

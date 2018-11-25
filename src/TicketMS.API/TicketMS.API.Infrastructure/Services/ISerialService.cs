@@ -11,7 +11,5 @@ namespace TicketMS.API.Infrastructure.Services
         int CreateSerial(SerialVM serial);
         void EditSerial(SerialVM serial);
         void DeleteSerial(int id);
-
-        void SetAsDefault(int id);
     }
 }

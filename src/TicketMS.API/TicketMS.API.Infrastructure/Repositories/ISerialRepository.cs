@@ -13,7 +13,5 @@ namespace TicketMS.API.Infrastructure.Repositories
         int CreateSerial(SerialDTO serialDTO);
         void EditSerial(int id, SerialDTO serialDTO);
         void DeleteSerial(int id);
-
-        void SetAsDefault(int id);
     }
 }

@@ -9,9 +9,6 @@ namespace TicketMS.API.ViewModels.Serial
         public string Note { get; set; }
 
         [BindNever]
-        public bool IsDefault { get; set; }
-
-        [BindNever]
         public int PackagesCount { get; set; }
         [BindNever]
         public int TicketsCount { get; set; }

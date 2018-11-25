@@ -58,13 +58,5 @@ namespace TicketMS.API.Controllers
             serialService.DeleteSerial(id);
             return Ok();
         }
-
-        [HttpPut("SetDefault/{id?}")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public IActionResult SetDefault(int id)
-        {
-            serialService.SetAsDefault(id);
-            return Ok();
-        }
     }
 }

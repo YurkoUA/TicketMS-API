@@ -6,8 +6,6 @@
         public string Name { get; set; }
         public string Note { get; set; }
 
-        public bool IsDefault { get; set; }
-
         public int PackagesCount { get; set; }
         public int TicketsCount { get; set; }
     }
