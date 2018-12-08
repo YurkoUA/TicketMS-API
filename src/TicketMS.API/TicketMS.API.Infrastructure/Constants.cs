@@ -7,5 +7,10 @@
 
         public const string ID_PARAMETER_NAME = "@id";
         public const string TOTAL_PARAMETER_NAME = "@total";
+
+        public const string CONTENT_TYPE = "Content-Type";
+        public const string JSON_MIME = "application/json";
+
+        public const int SQL_CUSTOM_EXCEPTION_STARTS = 50001;
     }
 }

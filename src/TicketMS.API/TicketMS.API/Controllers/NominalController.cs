@@ -27,7 +27,7 @@ namespace TicketMS.API.Controllers
             return Ok(nominalService.GetAllNominals());
         }
 
-        [HttpGet("Get/{id?}")]
+        [HttpGet("Get")]
         public IActionResult GetById(int id)
         {
             return Ok(nominalService.GetNominal(id));

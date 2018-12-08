@@ -63,7 +63,7 @@ namespace TicketMS.API.Controllers
             return Ok(ticketService.GetDuplicatedTickets());
         }
 
-        [HttpGet("ByPackage/{packageId?}")]
+        [HttpGet("ByPackage")]
         public IActionResult GetByPackage(int packageId)
         {
             return Ok(ticketService.GetByPackage(packageId));
@@ -75,7 +75,7 @@ namespace TicketMS.API.Controllers
             return Ok(ticketService.GetByNote(searchVM.Expression));
         }
 
-        [HttpGet("DuplicatesWith/{id?}")]
+        [HttpGet("DuplicatesWith")]
         public IActionResult GetDuplicatesWith(int id)
         {
             return Ok(ticketService.GetDuplicatesWith(id));
@@ -99,7 +99,7 @@ namespace TicketMS.API.Controllers
             return Ok(ticketService.CountTickets());
         }
 
-        [HttpGet("Get/{id?}")]
+        [HttpGet("Get")]
         public IActionResult GetById(int id)
         {
             return Ok(ticketService.GetTicket(id));
@@ -119,7 +119,7 @@ namespace TicketMS.API.Controllers
             return Identifier(id);
         }
 
-        [HttpPut("{id?}")]
+        [HttpPut]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult Edit(int id, [FromBody]TicketEditVM ticket)
         {
@@ -135,7 +135,7 @@ namespace TicketMS.API.Controllers
             return Ok();
         }
 
-        [HttpPut("ChangeNumber/{id?}")]
+        [HttpPut("ChangeNumber")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult ChangeNumber(int id, [FromBody]TicketNumberVM numberVM)
         {
@@ -143,7 +143,7 @@ namespace TicketMS.API.Controllers
             return Ok();
         }
 
-        [HttpPut("Move/{id?}")]
+        [HttpPut("Move")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult Move([FromBody]TicketMoveVM moveVM)
         {
@@ -151,7 +151,7 @@ namespace TicketMS.API.Controllers
             return Ok();
         }
 
-        [HttpPut("MoveMany/{id?}")]
+        [HttpPut("MoveMany")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult MoveMany([FromBody]TicketMoveManyVM moveVM)
         {

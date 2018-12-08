@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Data.SqlClient;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Primitives;
-using Newtonsoft.Json;
+using TicketMS.API.Infrastructure;
 using TicketMS.API.Infrastructure.Exceptions;
+using TicketMS.API.Infrastructure.Helpers;
 
 namespace TicketMS.API.Filters
 {
+    [AttributeUsage(AttributeTargets.Class, Inherited = true, AllowMultiple = false)]
     public class HandleExceptionAttribute : Attribute, IExceptionFilter
     {
         public void OnException(ExceptionContext context)
@@ -20,12 +23,16 @@ namespace TicketMS.API.Filters
             {
                 statusCode = (int)(context.Exception as CustomException).StatusCode;
             }
+            else if (context.Exception is SqlException sqlExp && sqlExp.Number >= Constants.SQL_CUSTOM_EXCEPTION_STARTS)
+            {
+                statusCode = 400;
+            }
 
             context.ExceptionHandled = true;
 
-            context.HttpContext.Response.StatusCode = 500;
-            context.HttpContext.Response.Headers.Add("Content-Type", new StringValues("application/json"));
-            context.HttpContext.Response.WriteAsync(JsonConvert.SerializeObject(new { context.Exception.Message }));
+            context.HttpContext.Response.StatusCode = statusCode;
+            context.HttpContext.Response.Headers.Add(Constants.CONTENT_TYPE, new StringValues(Constants.JSON_MIME));
+            context.HttpContext.Response.WriteAsync(JsonHelper.SerializeAsArray(context.Exception.Message));
         }
     }
 }

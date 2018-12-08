@@ -28,7 +28,7 @@ namespace TicketMS.API.Controllers
             return Ok(colorService.GetAllColors());
         }
 
-        [HttpGet("Get/{id?}")]
+        [HttpGet("Get")]
         public IActionResult GetById(int id)
         {
             return Ok(colorService.GetColor(id));

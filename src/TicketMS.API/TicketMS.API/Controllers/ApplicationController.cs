@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using TicketMS.API.Filters;
 using TicketMS.API.Infrastructure.Interfaces;
 using TicketMS.API.Infrastructure.Models;
 using TicketMS.API.ViewModels.Primitives;
@@ -14,6 +15,7 @@ namespace TicketMS.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [HandleException]
     public class ApplicationController : Controller
     {
         public UserToken UserToken { get; } = new UserToken();
