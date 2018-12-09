@@ -29,19 +29,19 @@ namespace TicketMS.API.Controllers
             return Ok(packageService.GetList(getListVM, out _));
         }
 
-        [HttpGet("BySerial/{serialId?}")]
+        [HttpGet("BySerial")]
         public IActionResult GetBySerial(int serialId)
         {
             return Ok(packageService.GetBySerial(serialId));
         }
 
-        [HttpGet("ByColor/{colorId?}")]
+        [HttpGet("ByColor")]
         public IActionResult GetByColor(int colorId)
         {
             return Ok(packageService.GetByColor(colorId));
         }
 
-        [HttpGet("ByNominal/{nominalId?}")]
+        [HttpGet("ByNominal")]
         public IActionResult GetByNominal(int nominalId)
         {
             return Ok(packageService.GetByNominal(nominalId));
@@ -93,7 +93,7 @@ namespace TicketMS.API.Controllers
             return Identifier(id);
         }
 
-        [HttpPut("{id?}"), ValidateModel]
+        [HttpPut, ValidateModel]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult Edit(int id, [FromBody]PackageCreateVM packageVM)
         {
@@ -141,7 +141,7 @@ namespace TicketMS.API.Controllers
             return Ok();
         }
 
-        [HttpDelete("{id?}"), ValidateModel]
+        [HttpDelete, ValidateModel]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult Delete(int id)
         {
