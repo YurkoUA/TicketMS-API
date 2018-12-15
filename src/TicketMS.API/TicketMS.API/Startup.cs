@@ -60,6 +60,11 @@ namespace TicketMS.API
                 options.Filters.Add(new CorsAuthorizationFilterFactory("AllowAllOrigin"));
             });
 
+            services.Configure<ApiBehaviorOptions>(opt =>
+            {
+                opt.SuppressModelStateInvalidFilter = true;
+            });
+
             Bootstrap.Bootstrap.Initialize();
         }
 

@@ -42,7 +42,7 @@ namespace TicketMS.API.Controllers
             return Identifier(id);
         }
 
-        [HttpPut("{id?}"), ValidateModel]
+        [HttpPut, ValidateModel]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult Edit(int id, [FromBody]ColorVM color)
         {
@@ -51,7 +51,7 @@ namespace TicketMS.API.Controllers
             return Ok();
         }
 
-        [HttpDelete("{id?}")]
+        [HttpDelete]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult Delete(int id)
         {

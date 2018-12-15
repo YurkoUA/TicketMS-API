@@ -12,7 +12,7 @@ namespace TicketMS.API.Infrastructure.Common.Attributes.Validation
         {
             if (value is string colorName)
             {
-                return Regex.IsMatch(colorName, @"^[a-z]$");
+                return Regex.IsMatch(colorName, @"^[A-Za-z-]+$");
             }
             throw new ArgumentException();
         }

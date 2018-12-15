@@ -24,91 +24,106 @@ namespace TicketMS.API.Controllers
         [HttpGet("List")]
         public IActionResult GetAll([FromQuery]PagingVM pagingVM)
         {
-            return Ok(ticketService.GetTickets(pagingVM, out _));
+            var tickets = ticketService.GetTickets(pagingVM, out int totalCount);
+            return PagingResponse(tickets, totalCount);
         }
 
         [HttpGet("Dates")]
         public IActionResult GetByDates([FromQuery]DateRangeVM dateRangeVM)
         {
-            return Ok(ticketService.GetTickets(dateRangeVM));
+            var tickets = ticketService.GetTickets(dateRangeVM);
+            return Ok(tickets);
         }
 
         [HttpGet("Happy")]
         public IActionResult GetHappy([FromQuery]PagingVM pagingVM)
         {
-            return Ok(ticketService.GetHappyTickets(pagingVM, out _));
+            var tickets = ticketService.GetHappyTickets(pagingVM, out int total);
+            return PagingResponse(tickets, total);
         }
 
         [HttpGet("Unallocated")]
         public IActionResult GetUnallocated()
         {
-            return Ok(ticketService.GetUnallocatedTickets());
+            var tickets = ticketService.GetUnallocatedTickets();
+            return Ok();
         }
 
         [HttpGet("Reversible")]
         public IActionResult GetReversible()
         {
-            return Ok(ticketService.GetReversibleTickets());
+            var tickets = ticketService.GetReversibleTickets();
+            return Ok(tickets);
         }
 
         [HttpGet("Consistent")]
         public IActionResult GetConsistent()
         {
-            return Ok(ticketService.GetConsistentTickets());
+            var tickets = ticketService.GetConsistentTickets();
+            return Ok(tickets);
         }
 
         [HttpGet("Duplicated")]
         public IActionResult GetDuplicated()
         {
-            return Ok(ticketService.GetDuplicatedTickets());
+            var tickets = ticketService.GetDuplicatedTickets();
+            return Ok(tickets);
         }
 
         [HttpGet("ByPackage")]
         public IActionResult GetByPackage(int packageId)
         {
-            return Ok(ticketService.GetByPackage(packageId));
+            var tickets = ticketService.GetByPackage(packageId);
+            return Ok(tickets);
         }
 
         [HttpGet("ByNote")]
         public IActionResult GetByNote([FromQuery]SearchVM searchVM)
         {
-            return Ok(ticketService.GetByNote(searchVM.Expression));
+            var tickets = ticketService.GetByNote(searchVM.Expression);
+            return Ok(tickets);
         }
 
         [HttpGet("DuplicatesWith")]
         public IActionResult GetDuplicatesWith(int id)
         {
-            return Ok(ticketService.GetDuplicatesWith(id));
+            var tickets = ticketService.GetDuplicatesWith(id);
+            return Ok(tickets);
         }
 
         [HttpGet("Filter")]
         public IActionResult Filter([FromQuery]TicketFilterVM filterVM)
         {
-            return Ok(ticketService.Filter(filterVM, out _));
+            var tickets = ticketService.Filter(filterVM, out int total);
+            return PagingResponse(tickets, total);
         }
 
         [HttpGet("Find")]
         public IActionResult Find([FromQuery]TicketSearchVM searchVM)
         {
-            return Ok(ticketService.Find(searchVM));
+            var tickets = ticketService.Find(searchVM);
+            return Ok(tickets);
         }
 
         [HttpGet("Count")]
         public IActionResult Count()
         {
-            return Ok(ticketService.CountTickets());
+            var count = ticketService.CountTickets();
+            return Ok(count);
         }
 
         [HttpGet("Get")]
         public IActionResult GetById(int id)
         {
-            return Ok(ticketService.GetTicket(id));
+            var ticket = ticketService.GetTicket(id);
+            return Ok();
         }
 
         [HttpGet("Random")]
         public IActionResult GetRandom()
         {
-            return Ok(ticketService.GetRandomTicket());
+            var ticket = ticketService.GetRandomTicket();
+            return Ok(ticket);
         }
 
         [HttpPost]

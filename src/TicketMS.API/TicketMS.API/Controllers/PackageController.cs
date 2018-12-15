@@ -26,43 +26,50 @@ namespace TicketMS.API.Controllers
         [HttpGet("List")]
         public IActionResult GetAll([FromQuery]PackageGetListVM getListVM)
         {
-            return Ok(packageService.GetList(getListVM, out _));
+            var packages = packageService.GetList(getListVM, out int total);
+            return PagingResponse(packages, total);
         }
 
         [HttpGet("BySerial")]
         public IActionResult GetBySerial(int serialId)
         {
-            return Ok(packageService.GetBySerial(serialId));
+            var packages = packageService.GetBySerial(serialId);
+            return Ok(packages);
         }
 
         [HttpGet("ByColor")]
         public IActionResult GetByColor(int colorId)
         {
-            return Ok(packageService.GetByColor(colorId));
+            var packages = packageService.GetByColor(colorId);
+            return Ok(packages);
         }
 
         [HttpGet("ByNominal")]
         public IActionResult GetByNominal(int nominalId)
         {
-            return Ok(packageService.GetByNominal(nominalId));
+            var packages = packageService.GetByNominal(nominalId);
+            return Ok(packages);
         }
 
         [HttpGet("Filter"), ValidateModel]
         public IActionResult Filter([FromQuery]PackageFilterVM filterVM)
         {
-            return Ok(packageService.Filter(filterVM));
+            var packages = packageService.Filter(filterVM);
+            return Ok(packages);
         }
 
         [HttpGet("Available"), ValidateModel]
         public IActionResult GetAvailableForTicket([FromQuery]PackageFilterVM filterVM)
         {
-            return Ok(packageService.GetAvailableForTicket(filterVM));
+            var packages = packageService.GetAvailableForTicket(filterVM);
+            return Ok(packages);
         }
 
         [HttpGet("Count")]
         public IActionResult Count()
         {
-            return Ok(packageService.CountPackages());
+            var count = packageService.CountPackages();
+            return Ok(count);
         }
 
         [HttpGet("Find"), ValidateModel]
@@ -74,7 +81,8 @@ namespace TicketMS.API.Controllers
         [HttpGet("Get")]
         public IActionResult GetPackage(int id)
         {
-            return Ok(packageService.GetPackage(id));
+            var package = packageService.GetPackage(id);
+            return Ok(package);
         }
 
         [HttpPost, ValidateModel]

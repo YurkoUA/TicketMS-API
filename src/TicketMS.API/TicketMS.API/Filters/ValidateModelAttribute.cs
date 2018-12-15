@@ -17,7 +17,8 @@ namespace TicketMS.API.Filters
         {
             if (context.ModelState?.IsValid == false)
             {
-                context.Result = (context.Controller as ApplicationController).BadRequestWithErrors(context.ModelState.ToEnumerableString().ToArray());
+                var errors = context.ModelState.ToEnumerableString().ToArray();
+                context.Result = (context.Controller as ApplicationController).BadRequestWithErrors(errors);
             }
         }
     }
