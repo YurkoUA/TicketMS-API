@@ -4,6 +4,7 @@ using TicketMS.API.Infrastructure.DTO.Color;
 using TicketMS.API.Infrastructure.DTO.Package;
 using TicketMS.API.Infrastructure.DTO.Serial;
 using TicketMS.API.Infrastructure.DTO.Ticket;
+using TicketMS.API.ViewModels;
 using TicketMS.API.ViewModels.Color;
 using TicketMS.API.ViewModels.Nominal;
 using TicketMS.API.ViewModels.Package;
@@ -39,6 +40,9 @@ namespace TicketMS.API.Bootstrap.AutoMapper
             CreateMap<ColorEM, ColorSimpleVM>();
             CreateMap<ColorVM, ColorEM>();
             CreateMap<ColorVM, ColorDTO>();
+
+            CreateMap<ColorEM, NameValueVM<int>>()
+                .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Id));
         }
 
         private void ConfigureSerialMapping()
@@ -47,6 +51,9 @@ namespace TicketMS.API.Bootstrap.AutoMapper
             CreateMap<SerialEM, SerialSimpleVM>();
             CreateMap<SerialVM, SerialEM>();
             CreateMap<SerialVM, SerialDTO>();
+
+            CreateMap<SerialEM, NameValueVM<int>>()
+                .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Id));
         }
 
         private void ConfigureNominalMapping()
@@ -54,6 +61,10 @@ namespace TicketMS.API.Bootstrap.AutoMapper
             CreateMap<NominalEM, NominalVM>();
             CreateMap<NominalEM, NominalSimpleVM>();
             CreateMap<NominalVM, NominalEM>();
+
+            CreateMap<NominalEM, NameValueVM<decimal>>()
+                .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Value));
         }
 
         private void ConfigurePackageMapping()

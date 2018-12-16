@@ -25,13 +25,22 @@ namespace TicketMS.API.Controllers
         [HttpGet("List")]
         public IActionResult GetAll()
         {
-            return Ok(serialService.GetAllSeries());
+            var series = serialService.GetAllSeries();
+            return Ok(series);
         }
 
         [HttpGet("Get")]
         public IActionResult GetById(int id)
         {
-            return Ok(serialService.GetSerial(id));
+            var serial = serialService.GetSerial(id);
+            return Ok();
+        }
+
+        [HttpGet("NameValues")]
+        public IActionResult NameValues()
+        {
+            var nameValues = serialService.GetSeriesNameValues();
+            return Ok(nameValues);
         }
 
         [HttpPost, ValidateModel]

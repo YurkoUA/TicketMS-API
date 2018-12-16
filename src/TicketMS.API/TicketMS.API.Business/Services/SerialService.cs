@@ -3,6 +3,7 @@ using TicketMS.API.Infrastructure.DTO.Serial;
 using TicketMS.API.Infrastructure.Interfaces;
 using TicketMS.API.Infrastructure.Repositories;
 using TicketMS.API.Infrastructure.Services;
+using TicketMS.API.ViewModels;
 using TicketMS.API.ViewModels.Serial;
 
 namespace TicketMS.API.Business.Services
@@ -14,6 +15,12 @@ namespace TicketMS.API.Business.Services
         public SerialService(IMappingService mapper, ISerialRepository serialRepository) : base(mapper)
         {
             this.serialRepository = serialRepository;
+        }
+
+        public IEnumerable<NameValueVM<int>> GetSeriesNameValues()
+        {
+            var series = serialRepository.GetSeriesForSelectList();
+            return mapper.ConvertCollectionTo<NameValueVM<int>>(series);
         }
 
         public IEnumerable<SerialVM> GetAllSeries()

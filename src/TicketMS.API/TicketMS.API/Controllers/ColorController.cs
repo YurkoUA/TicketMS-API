@@ -25,13 +25,22 @@ namespace TicketMS.API.Controllers
         [HttpGet("List")]
         public IActionResult GetAll()
         {
-            return Ok(colorService.GetAllColors());
+            var colors = colorService.GetAllColors();
+            return Ok(colors);
         }
 
         [HttpGet("Get")]
         public IActionResult GetById(int id)
         {
-            return Ok(colorService.GetColor(id));
+            var color = colorService.GetColor(id);
+            return Ok(color);
+        }
+
+        [HttpGet("NameValues")]
+        public IActionResult NameValues()
+        {
+            var nameValues = colorService.GetColorsNameValues();
+            return Ok(nameValues);
         }
 
         [HttpPost, ValidateModel]

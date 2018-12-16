@@ -24,13 +24,22 @@ namespace TicketMS.API.Controllers
         [HttpGet("List")]
         public IActionResult GetAll()
         {
-            return Ok(nominalService.GetAllNominals());
+            var nominals = nominalService.GetAllNominals();
+            return Ok(nominals);
         }
 
         [HttpGet("Get")]
         public IActionResult GetById(int id)
         {
-            return Ok(nominalService.GetNominal(id));
+            var nominal = nominalService.GetNominal(id);
+            return Ok(nominal);
+        }
+
+        [HttpGet("NameValues")]
+        public IActionResult NameValues()
+        {
+            var nameValues = nominalService.GetNominalsNameValues();
+            return Ok(nameValues);
         }
 
         [HttpPost, ValidateModel]

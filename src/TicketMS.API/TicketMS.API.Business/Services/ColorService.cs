@@ -3,6 +3,7 @@ using TicketMS.API.Infrastructure.DTO.Color;
 using TicketMS.API.Infrastructure.Interfaces;
 using TicketMS.API.Infrastructure.Repositories;
 using TicketMS.API.Infrastructure.Services;
+using TicketMS.API.ViewModels;
 using TicketMS.API.ViewModels.Color;
 
 namespace TicketMS.API.Business.Services
@@ -20,6 +21,12 @@ namespace TicketMS.API.Business.Services
         {
             var colors = colorRepository.GetAllColors();
             return mapper.ConvertCollectionTo<ColorVM>(colors);
+        }
+
+        public IEnumerable<NameValueVM<int>> GetColorsNameValues()
+        {
+            var colors = colorRepository.GetColorsForSelectList();
+            return mapper.ConvertCollectionTo<NameValueVM<int>>(colors);
         }
 
         public ColorVM GetColor(int id)
