@@ -8,7 +8,7 @@ namespace TicketMS.API.ViewModels.Color
         [BindNever]
         public int Id { get; set; }
 
-        [Required]
+        [Required, StringLength(32)]
         public string Name { get; set; }
     }
 }
