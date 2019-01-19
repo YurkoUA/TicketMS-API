@@ -46,7 +46,7 @@ namespace TicketMS.API.Controllers
         public IActionResult GetUnallocated()
         {
             var tickets = ticketService.GetUnallocatedTickets();
-            return Ok();
+            return Ok(tickets);
         }
 
         [HttpGet("Reversible")]
