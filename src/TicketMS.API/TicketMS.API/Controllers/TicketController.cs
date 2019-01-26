@@ -116,7 +116,7 @@ namespace TicketMS.API.Controllers
         public IActionResult GetById(int id)
         {
             var ticket = ticketService.GetTicket(id);
-            return Ok();
+            return Ok(ticket);
         }
 
         [HttpGet("Random")]
