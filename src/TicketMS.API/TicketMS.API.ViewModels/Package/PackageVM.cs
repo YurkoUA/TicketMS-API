@@ -7,7 +7,7 @@ namespace TicketMS.API.ViewModels.Package
 {
     public class PackageVM : PackageSimpleVM
     {
-        public int FirstDigit { get; set; }
+        public int? FirstDigit { get; set; }
 
         public NominalSimpleVM Nominal { get; set; }
         public ColorSimpleVM Color { get; set; }

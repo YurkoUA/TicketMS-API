@@ -6,7 +6,7 @@ namespace TicketMS.API.Data.Entity
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public int FirstDigit { get; set; }
+        public int? FirstDigit { get; set; }
 
         public NominalEM Nominal { get; set; }
         public ColorEM Color { get; set; }
